@@ -11,11 +11,16 @@ parserOptions:
   sourceType: module
 plugins:
   - react
-rules: {
-  "object-curly-newline": ["error", {
-        "ObjectExpression": "always",
-        "ObjectPattern": { "multiline": true },
-        "ImportDeclaration": { "multiline": true } ,
-        "ExportDeclaration": { "multiline": true, "minProperties": 3 }
-    }]
-}
+rules:
+  {
+    'object-curly-newline':
+      [
+        'error',
+        {
+          'ObjectExpression': 'always',
+          'ObjectPattern': { 'multiline': true },
+          'ImportDeclaration': { 'multiline': true },
+          'ExportDeclaration': { 'multiline': true, 'minProperties': 3 },
+        },
+      ],
+  }
