@@ -10,11 +10,12 @@ repos:
     rev: v2.3.2
     hooks:
       - id: prettier
-        types: [javascript]
   - repo: https://github.com/pre-commit/mirrors-eslint
     rev: v7.32.0
     hooks:
       - id: eslint
+        files: \.[jt]sx?$
+        types: [file]
         additional_dependencies:
           - eslint@7.32.0
           - eslint-plugin-react@^7.21.5
