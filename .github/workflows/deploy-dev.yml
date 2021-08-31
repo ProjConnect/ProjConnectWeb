@@ -3,7 +3,7 @@ name: Dev Deploy
 on:
   push:
     branches:
-      - main
+      - staging
   workflow_dispatch:
 
 jobs:
