@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 jobs:
   test:
@@ -29,4 +28,4 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > /home/runner/.ssh/ssh_key
           chmod 400 /home/runner/.ssh/ssh_key
       - run: pip install fabric
-      - run: fab -i /home/runner/.ssh/ssh_key -H ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST_PROD }}:${{ secrets.REMOTE_PORT }} deploy
+      - run: fab -i /home/runner/.ssh/ssh_key -H ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST_DEV }}:${{ secrets.REMOTE_PORT }} deploy --branch main
