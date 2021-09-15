@@ -1,0 +1,6 @@
+.wrapper {
+    background-color: #ECECEC;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+}
