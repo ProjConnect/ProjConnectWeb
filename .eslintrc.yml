@@ -13,6 +13,7 @@ plugins:
   - react
 rules:
   {
+    'linebreak-style': ["error", "windows"], # corrige linebreak-style entre linux e windows
     'object-curly-newline':
       [
         'error',
