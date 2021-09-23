@@ -9,8 +9,8 @@ import LandingPage from './pages/LandingPage/LandingPage';
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
-      <Route path="/" component={LandingPage} />
-      <Route path="/list" component={App} />
+      <Route exact path="/" component={LandingPage} />
+      <Route exact path="/list" component={App} />
     </Switch>
   </BrowserRouter>,
   document.getElementById('root'),
