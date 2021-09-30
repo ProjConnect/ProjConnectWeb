@@ -5,22 +5,18 @@ import logo from '../../assets/images/logo_transparent.png';
 
 function LoginPage() {
   return (
-    <div className="background">
-      <div className="rightDiv">
+    <div className="login-background">
+      <div className="center-div">
         <div className="box">
-          <img src={logo} className="logo" alt="ProjConnect's logo" />
-          <p className="text">
+          <div className="logo-div">
+            <img src={logo} className="login-logo" alt="ProjConnect's logo" />
+          </div>
+          <p className="login-text">
             O ProjConnect é uma plataforma de compartilhamento de ideias de
             projetos de computação destinada à comunidade da Unicamp. Clique no
             botão abaixo para acessar sua conta através do email institucional.
           </p>
-          <GoogleLogin
-            buttonText="Fazer login com Google"
-            style={{
-              backgroundColor: '#6490dd',
-              color: '#ffffff',
-            }}
-          />
+          <GoogleLogin buttonText="Fazer login com Google" />
         </div>
       </div>
     </div>

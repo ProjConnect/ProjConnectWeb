@@ -1,5 +1,5 @@
-.background {
-  background-color: #ececec;
+.login-background {
+  background-color: #ffffff;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -10,7 +10,7 @@
 
 .box {
   border: 2px solid rgba(46, 105, 209, 0.74);
-  padding: 20px;
+  padding-bottom: 20px;
   border-radius: 10px;
   background-color: #ffffff;
   display: flex;
@@ -20,13 +20,22 @@
   width: 40vw;
 }
 
-.logo {
-  width: 20vw;
+.logo-div {
   background-color: rgba(46, 105, 209, 0.74);
-  border-radius: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  width: 40vw;
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.text {
+.login-logo {
+  width: 20vw;
+}
+
+.login-text {
   text-align: center;
   font-family: Roboto;
   font-style: normal;
@@ -34,9 +43,11 @@
   font-size: 20px;
   line-height: 23px;
   color: #000;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-.rightDiv {
+.center-div {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -46,23 +57,23 @@
 }
 
 @media only screen and (max-width: 700px) {
-  .background {
+  .login-background {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
 
-  .logo {
+  .login-logo {
     width: 60vw;
   }
 
-  .text {
+  .login-text {
     font-size: 18px;
     line-height: 20px;
   }
 
-  .rightDiv {
+  .center-div {
     padding-right: 10px;
     padding-left: 10px;
   }
