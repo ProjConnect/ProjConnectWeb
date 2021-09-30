@@ -5,12 +5,14 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import LandingPage from './pages/LandingPage/LandingPage';
+import LoginPage from './pages/LoginPage/LoginPage';
 
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <Route exact path="/" component={LandingPage} />
       <Route exact path="/list" component={App} />
+      <Route exact path="/login" component={LoginPage} />
     </Switch>
   </BrowserRouter>,
   document.getElementById('root'),

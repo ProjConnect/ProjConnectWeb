@@ -1,0 +1,69 @@
+.background {
+  background-color: #ececec;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 20vw;
+  padding-left: 20vw;
+}
+
+.box {
+  border: 2px solid rgba(46, 105, 209, 0.74);
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 40vw;
+}
+
+.logo {
+  width: 20vw;
+  background-color: rgba(46, 105, 209, 0.74);
+  border-radius: 10px;
+}
+
+.text {
+  text-align: center;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 23px;
+  color: #000;
+}
+
+.rightDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+@media only screen and (max-width: 700px) {
+  .background {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo {
+    width: 60vw;
+  }
+
+  .text {
+    font-size: 18px;
+    line-height: 20px;
+  }
+
+  .rightDiv {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+}
