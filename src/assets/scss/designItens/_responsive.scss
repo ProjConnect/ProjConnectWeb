@@ -1,0 +1,125 @@
+@media screen and (max-width: 991px){
+
+  .navbar {
+    padding: 0;
+
+    &.navbar-absolute {
+      padding-top: 0;
+    }
+
+    .navbar-brand {
+      font-size: 16px;
+      margin-right: 0;
+    }
+  }
+
+    .profile-photo .profile-photo-small{
+        margin-left: -2px;
+    }
+
+    .navbar{
+        .container-fluid{
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+
+        .navbar-nav{
+            .nav-item:first-child{
+              margin-top: 10px;
+            }
+            .nav-item:not(:last-child){
+                margin-bottom: 10px;
+            }
+        }
+    }
+
+    .wrapper{
+        transition: 0.50s, cubic-bezier(0.685, 0.0473, 0.346, 1);
+    }
+
+    .nav-open{
+        .main-panel{
+            right: 0;
+        }
+
+        body{
+            position: relative;
+            overflow-x: hidden;
+        }
+    }
+
+    @-webkit-keyframes fadeIn {
+      0% {opacity: 0;}
+      100% {opacity: 1;}
+    }
+    @-moz-keyframes fadeIn {
+      0% {opacity: 0;}
+      100% {opacity: 1;}
+    }
+    @keyframes fadeIn {
+      0% {opacity: 0;}
+      100% {opacity: 1;}
+    }
+
+    .navbar-nav{
+        .nav-link{
+            i.fa,
+            i.nc-icon{
+                opacity: .5;
+            }
+        }
+    }
+}
+@media (max-width: 991px) and (min-width: 768px){
+  .nav-tabs-navigation.verical-navs {
+    padding: 0px 2px;
+  }
+}
+
+@media screen and (min-width: 992px){
+    .navbar-collapse{
+        background: none !important;
+    }
+
+    .navbar .navbar-toggle{
+        display: none;
+    }
+
+    .navbar-nav{
+        .nav-link{
+            &.profile-photo{
+                padding: 0;
+                margin: 7px .7rem;
+            }
+        }
+    }
+
+}
+
+@media screen and (max-width: 768px){
+  .card-stats [class*="col-"] .statistics::after {
+    display: none;
+  }
+
+    .landing-page .section-story-overview .image-container:nth-child(2){
+        margin-left: 0;
+        margin-bottom: 30px;
+    }
+
+    .card {
+      .form-horizontal {
+        .col-md-3.col-form-label {
+          text-align: left;
+        }
+      }
+    }
+
+}
+
+@media screen and (max-width: 374px){
+  .login-page {
+    .content {
+      padding-top: 10vh;
+    }
+  }
+}

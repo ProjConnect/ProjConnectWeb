@@ -1,0 +1,95 @@
+.card {
+  border-radius: 12px;
+  box-shadow: 0 6px 10px -4px rgba(0, 0, 0, 0.15);
+  background-color: #FFFFFF;
+  color: #252422;
+  position: relative;
+  margin-bottom: 10px;
+  margin-top: 100px;
+  margin-left: 20px;
+  margin-right: 20px;
+  border: 1px;
+  border-color: lightblue;
+  border-style: solid;
+  transition: 200ms;
+
+.card:hover {
+	transition: 200ms;
+	border: 1px;
+	border-color: #5279BD;
+	border-style: solid;
+	}
+
+    .card-body{
+        padding: 15px 15px 10px 15px;
+    }
+
+    .card-header{
+      &:not([data-background-color]){
+        background-color: #204BBD;
+      }
+      padding: 1px 1px 0;
+      max-height: 50px;
+      border-bottom-right-radius: 12px;
+      border-top-right-radius: 12px;
+
+      .card-title {
+          margin-top: 10px;
+          height: 25px;
+          color: white;
+      }
+    }
+
+    .card-date {
+        flex: 0.3;
+        font-size: small;
+        margin-top: 0;
+    }
+
+    .image{
+        border-radius: 12px;
+        margin-bottom: 12px;
+        margin-top: 10px;
+        max-width: 410px;
+        max-height: 400px;
+    }
+
+    .avatar {
+        width: 30px;
+        height: 30px;
+        overflow: hidden;
+        border-radius: 50%;
+        margin: 15px;
+    }
+
+    .topic{
+        font-size: 12px;
+        color: violet;
+        margin-bottom: 0;
+        font-weight: bold;
+    }
+
+    label{
+        font-size: 12px;
+        margin-bottom: 5px;
+        color: black;
+    }
+
+    .card-footer{
+        background-color: transparent;
+        border: 0;
+
+        .stats{
+            i{
+                margin-right: 5px;
+                position: relative;
+                top: 0px;
+                color: #66615B;
+            }
+        }
+
+        .btn{
+            margin: 0;
+        }
+    }
+}
