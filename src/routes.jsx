@@ -8,7 +8,6 @@ import NavBar from './components/Navbars/Navbar';
 
 export const Routes = () => (
   <div>
-    <Route exact path="/Login" component={LandingPage} />
     <Route exact path="/">
       <Redirect to="/Login" />
     </Route>
