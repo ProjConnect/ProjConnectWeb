@@ -15,7 +15,7 @@ jobs:
           node-version: '15'
           cache: 'yarn'
       - run: yarn install --production
-      - run: DISABLE_ESLINT_PLUGIN=true yarn test
+      - run: DISABLE_ESLINT_PLUGIN=true yarn test --passWithNoTests
       - run: DISABLE_ESLINT_PLUGIN=true yarn build
   deploy:
     runs-on: ubuntu-latest
@@ -28,4 +28,4 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > /home/runner/.ssh/ssh_key
           chmod 400 /home/runner/.ssh/ssh_key
       - run: pip install fabric
-      - run: fab -i /home/runner/.ssh/ssh_key -H ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST_DEV }}:${{ secrets.REMOTE_PORT }} deploy --branch staging
+      - run: fab -i /home/runner/.ssh/ssh_key -H ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST_DEV }}:${{ secrets.REMOTE_PORT }} deploy --branch staging --stage dev

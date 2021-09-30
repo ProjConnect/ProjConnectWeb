@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { Button } from 'reactstrap';
 import './LandingPage.css';
 import logo from '../../assets/images/logo_transparent.png';
 import landingpage from '../../assets/images/landingpage.png';
@@ -20,9 +22,13 @@ function LandingPage() {
           Unicamp pode criar uma demanda de projeto que possa ser atendido pela
           disciplina de projetos.
         </p>
-        <button className="loginButton" type="button">
-          Entrar
-        </button>
+        <Link to="/Lista-projetos">
+          <Button
+            className="button-round"
+          >
+            Entrar
+          </Button>
+        </Link>
       </div>
     </div>
   );

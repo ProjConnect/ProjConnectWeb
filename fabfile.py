@@ -5,8 +5,8 @@ def set_node_version():
     return f"source ~/.nvm/nvm.sh && nvm use 15"
 
 @task
-def deploy(con, branch="main"):
-    code_dir = "~/ProjConnectWeb"
+def deploy(con, branch="main", stage="prod"):
+    code_dir = f"~/{stage}/ProjConnectWeb"
     with con.cd(code_dir):
         print(f"Fetching branch {branch}...")
         con.run(f"git fetch origin {branch}")

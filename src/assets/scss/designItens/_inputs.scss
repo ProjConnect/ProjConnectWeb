@@ -1,0 +1,19 @@
+.form-control {
+    background-color: white;
+    border: 1px solid pink;
+    border-radius: 4px;
+    color: #66615b;
+    line-height: normal;
+    font-size: 14px;
+    box-shadow: none;
+}
+
+textarea.form-control{
+    max-width: 100%;
+    max-height: 80px;
+    resize: none;
+    border: none;
+    border: 1px solid pink;
+    border-radius: 4px;
+    line-height: 2;
+}
