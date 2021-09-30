@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import React from 'react';
 import './App.css';
 import cards from './data';
@@ -23,6 +24,10 @@ function App() {
       ))}
     </div>
   );
+=======
+function App() {
+
+>>>>>>> Stashed changes
 }
 
 export default App;

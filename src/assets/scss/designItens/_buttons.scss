@@ -1,0 +1,31 @@
+.button,
+.navbar .navbar-nav > a.button{
+    border-width: 2px;
+    font-weight: 600;
+    font-size: 0.6875rem;
+    line-height: 1.35em;
+    text-transform: uppercase;
+    border: none;
+    margin: 10px 1px;
+    border-radius: 3px;
+    padding: 11 22 px;
+    cursor: pointer;
+
+    &:hover,
+    &:focus{
+        opacity: #EE4A68;
+        outline: 0 !important;
+    }
+}
+
+.button-round {
+    border-width: 1px;
+    border-radius: 30px;
+    padding-right: 23px;
+    padding-left: 23px;
+    background-color: #EE4A68;
+    color: white;
+    &.button-simple {
+        padding: 11px -1px  22px -1px;
+    }
+}

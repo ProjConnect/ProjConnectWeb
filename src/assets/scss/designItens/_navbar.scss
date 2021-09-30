@@ -1,0 +1,49 @@
+.navbar {
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    height: 72px;
+    margin-bottom: 25px;
+    background-color:#6490DD;
+
+    a {
+        vertical-align: middle;
+        &:not(.button):not(.dropdown-item){
+            color: white;
+        }
+    }
+
+    .nav-link{
+        font-size: 16px;
+        margin-top: 12px;
+        line-height: 1.625rem;
+    }
+
+    .navbar-logo{
+        position: absolute;
+        left: 0;
+        right: 0;
+        width: 45px;
+        top: -10px;
+    }
+
+    &.navbar-absolute{
+        position: absolute;
+        width: 100%;
+        padding-top: 10px;
+        z-index: 1029;
+    }
+
+    .navbar-wrapper{
+        display: inline-flex;
+        align-items: center;
+
+        .navbar-minimize{
+            padding-right: 10px;
+
+            .btn {
+                margin: 0;
+            }
+        }
+    }
+
+}
