@@ -1,10 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Navbar,
-  Container,
-  Col,
-} from 'reactstrap';
+import { Navbar, Container, Col } from 'reactstrap';
 import logo from '../../assets/images/logo_transparent1-01.png';
 
 function Header() {
@@ -12,10 +8,9 @@ function Header() {
   return (
     <Navbar
       expand="lg"
-      className={
-          `navbar-absolute fixed-top ${
-            color === 'transparent' ? 'navbar-transparent ' : ''}`
-      }
+      className={`navbar-absolute fixed-top ${
+        color === 'transparent' ? 'navbar-transparent ' : ''
+      }`}
     >
       <Container fluid>
         <Col md="2">
@@ -25,17 +20,17 @@ function Header() {
         </Col>
         <Col md="2">
           <div className="nav-link">
-            <Link to="/Lista-projetos">Lista de projetos</Link>
+            <Link to="/project/list">Lista de projetos</Link>
           </div>
         </Col>
         <Col md="2">
           <div className="nav-link">
-            <Link to="/Perfil">Meu perfil</Link>
+            <Link to="/profile">Meu perfil</Link>
           </div>
         </Col>
         <Col md="2">
           <div className="nav-link">
-            <Link to="/Login">Logout</Link>
+            <Link to="/login">Logout</Link>
           </div>
         </Col>
       </Container>

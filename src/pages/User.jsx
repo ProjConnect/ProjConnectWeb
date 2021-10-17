@@ -20,6 +20,7 @@ import {
 import Data from '../data';
 import 'react-vertical-timeline-component/style.min.css';
 import avatar from '../assets/images/avatar.png';
+import NavBar from '../components/Navbars/Navbar';
 
 function User() {
   const [isExpanded, setExpanded] = useState(false);
@@ -32,6 +33,7 @@ function User() {
 
   return (
     <>
+      <NavBar />
       <div className="content">
         <Row>
           <Col md="12">
@@ -51,27 +53,36 @@ function User() {
                 </div>
                 <p className="topic">Sobre mim</p>
                 <p className="description">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin malesuada arcu.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
+                  malesuada arcu.
                 </p>
                 <p className="topic">Github</p>
                 <p className="description">
-                  <a href="https://github.com/" onClick={(e) => e.preventDefault()}>
+                  <a
+                    href="https://github.com/"
+                    onClick={(e) => e.preventDefault()}
+                  >
                     https://github.com/
                   </a>
                 </p>
                 <p className="topic">Gitlab</p>
                 <p className="description">
-                  <a href="https://gitlab.com/" onClick={(e) => e.preventDefault()}>
+                  <a
+                    href="https://gitlab.com/"
+                    onClick={(e) => e.preventDefault()}
+                  >
                     https://gitlab.com/
                   </a>
                 </p>
                 <p className="topic">Conhecimento em linguagens</p>
                 <p className="description">
-                  Vestibulum urna massa, interdum sit amet tortor vitae, sagittis ultricies ligula.
+                  Vestibulum urna massa, interdum sit amet tortor vitae,
+                  sagittis ultricies ligula.
                 </p>
                 <p className="topic">Conhecimento em tecnologias</p>
                 <p className="description">
-                  Donec nisi, vitae vehicula nulla facilisis sed. Proin vitae quam dui.
+                  Donec nisi, vitae vehicula nulla facilisis sed. Proin vitae
+                  quam dui.
                 </p>
                 <p className="topic">Conhecimentos gerais</p>
                 <p className="description">
@@ -84,10 +95,8 @@ function User() {
                   <Row>
                     <Col className="ml-auto">
                       <div className="update ml-auto mr-auto">
-                        <Link to="/Editar-perfil">
-                          <Button
-                            className="button-round"
-                          >
+                        <Link to="/profile/edit">
+                          <Button className="button-round">
                             Editar perfil
                           </Button>
                         </Link>

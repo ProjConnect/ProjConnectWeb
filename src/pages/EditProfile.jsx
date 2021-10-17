@@ -13,10 +13,12 @@ import {
   Row,
   Col,
 } from 'reactstrap';
+import NavBar from '../components/Navbars/Navbar';
 
 function EditProfile() {
   return (
     <>
+      <NavBar />
       <div className="content">
         <Row>
           <Col md="12">
@@ -30,35 +32,24 @@ function EditProfile() {
                     <Col className="pr-1" md="3">
                       <FormGroup>
                         <label>Nome</label>
-                        <Input
-                          defaultValue="Roberta"
-                          type="text"
-                        />
+                        <Input defaultValue="Roberta" type="text" />
                       </FormGroup>
                     </Col>
                     <Col className="px-1" md="3">
                       <FormGroup>
                         <label>Sobrenome</label>
-                        <Input
-                          defaultValue="Veronez"
-                          type="text"
-                        />
+                        <Input defaultValue="Veronez" type="text" />
                       </FormGroup>
                     </Col>
                     <Col className="px-1" md="3">
                       <FormGroup>
                         <label>Usuário</label>
-                        <Input
-                          defaultValue="roberta123"
-                          type="text"
-                        />
+                        <Input defaultValue="roberta123" type="text" />
                       </FormGroup>
                     </Col>
                     <Col className="pl-1" md="3">
                       <FormGroup>
-                        <label htmlFor="exampleInputEmail1">
-                          E-mail
-                        </label>
+                        <label htmlFor="exampleInputEmail1">E-mail</label>
                         <Input
                           defaultValue="roberta123@dac.unicamp.br"
                           type="email"
@@ -81,19 +72,13 @@ function EditProfile() {
                     <Col className="pr-1" md="6">
                       <FormGroup>
                         <label>Github</label>
-                        <Input
-                          defaultValue="https://github.com/"
-                          type="text"
-                        />
+                        <Input defaultValue="https://github.com/" type="text" />
                       </FormGroup>
                     </Col>
                     <Col className="pl-1" md="6">
                       <FormGroup>
                         <label>Gitlab</label>
-                        <Input
-                          defaultValue="https://gitlab.com/"
-                          type="text"
-                        />
+                        <Input defaultValue="https://gitlab.com/" type="text" />
                       </FormGroup>
                     </Col>
                   </Row>
@@ -130,9 +115,7 @@ function EditProfile() {
                     <Row>
                       <div className="update ml-auto mr-auto">
                         <Link to="/Perfil">
-                          <Button
-                            className="button-round"
-                          >
+                          <Button className="button-round">
                             Atualizar perfil
                           </Button>
                         </Link>
