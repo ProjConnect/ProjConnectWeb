@@ -13,6 +13,7 @@ export const Routes = () => (
     </Route>
     <NavBar />
     <Switch>
+      <Route exact path="/Landing" component={LandingPage} />
       <Route exact path="/Lista-projetos" component={ProjectList} />
       <Route exact path="/Perfil" component={User} />
       <Route exact path="/Editar-perfil" component={EditProfile} />
