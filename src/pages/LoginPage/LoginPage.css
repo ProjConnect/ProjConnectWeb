@@ -1,0 +1,80 @@
+.login-background {
+  background-color: #ffffff;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 20vw;
+  padding-left: 20vw;
+}
+
+.box {
+  border: 2px solid rgba(46, 105, 209, 0.74);
+  padding-bottom: 20px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 40vw;
+}
+
+.logo-div {
+  background-color: rgba(46, 105, 209, 0.74);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  width: 40vw;
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-logo {
+  width: 20vw;
+}
+
+.login-text {
+  text-align: center;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 23px;
+  color: #000;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.center-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+@media only screen and (max-width: 700px) {
+  .login-background {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .login-logo {
+    width: 60vw;
+  }
+
+  .login-text {
+    font-size: 18px;
+    line-height: 20px;
+  }
+
+  .center-div {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+}
