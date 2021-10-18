@@ -1,9 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, CardHeader, CardTitle, CardBody, Row, Col } from 'reactstrap';
+
 import img1 from '../assets/images/img1.jpg';
 import NavBar from '../components/Navbars/Navbar';
+import apiHandler from '../services/api';
 
 function ProjectList() {
+  const [projectList, setProjectList] = useState([]);
+  useEffect(() => {
+    const fetchData = () => {
+      apiHandler
+        .get('/posts')
+        .then((response) => {
+          console.log(projectList);
+          setProjectList(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+          // redirecionar para página de erro dependendo do código
+          window.location.replace('/');
+        });
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <>
       <NavBar />
