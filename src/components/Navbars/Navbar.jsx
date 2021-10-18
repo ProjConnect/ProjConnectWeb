@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar, Container, Col } from 'reactstrap';
+import { Navbar, Container, Col, Button } from 'reactstrap';
 import logo from '../../assets/images/logo_transparent1-01.png';
+import { logout } from '../../services/auth';
 
 function Header() {
   const [color] = React.useState('transparent');
@@ -30,7 +31,9 @@ function Header() {
         </Col>
         <Col md="2">
           <div className="nav-link">
-            <Link to="/login">Logout</Link>
+            <Button className="button-round" onClick={logout}>
+              Logout
+            </Button>
           </div>
         </Col>
       </Container>

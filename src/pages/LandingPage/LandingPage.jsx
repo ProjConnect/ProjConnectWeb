@@ -22,7 +22,7 @@ function LandingPage() {
           Unicamp pode criar uma demanda de projeto que possa ser atendido pela
           disciplina de projetos.
         </p>
-        <Link to="/project/list">
+        <Link to="/login">
           <Button className="button-round">Entrar</Button>
         </Link>
       </div>
