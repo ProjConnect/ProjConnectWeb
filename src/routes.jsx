@@ -5,6 +5,7 @@ import LandingPage from './pages/LandingPage/LandingPage';
 import User from './pages/User';
 import EditProfile from './pages/EditProfile';
 import NavBar from './components/Navbars/Navbar';
+import AddProject from './pages/AddProject/AddProject';
 
 export const Routes = () => (
   <div>
@@ -18,6 +19,7 @@ export const Routes = () => (
       <Route exact path="/Perfil" component={User} />
       <Route exact path="/Editar-perfil" component={EditProfile} />
       <Route exact path="/Login" component={LandingPage} />
+      <Route exact path="/project/new" component={AddProject} />
     </Switch>
   </div>
 );
