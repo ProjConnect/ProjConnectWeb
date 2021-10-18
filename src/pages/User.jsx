@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable react/jsx-props-no-spreading */
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Button,
@@ -10,14 +11,30 @@ import {
   Row,
   Col,
 } from 'reactstrap';
+import useCollapse from 'react-collapsed';
+import '../assets/scss/historic.scss';
+import {
+  VerticalTimeline,
+  VerticalTimelineElement,
+} from 'react-vertical-timeline-component';
+import Data from '../data';
+import 'react-vertical-timeline-component/style.min.css';
 import avatar from '../assets/images/avatar.png';
 
 function User() {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({
+    isExpanded,
+  });
+  const IconStyles = {
+    background: '#06D6A0',
+  };
+
   return (
     <>
       <div className="content">
         <Row>
-          <Col md="8">
+          <Col md="12">
             <Card className="card-user">
               <CardHeader>
                 <CardTitle tag="h5" />
@@ -81,26 +98,51 @@ function User() {
               </CardFooter>
             </Card>
           </Col>
-          <Col md="4">
-            <Card>
-              <CardHeader>
-                <CardTitle tag="h4">Histórico de projetos</CardTitle>
-              </CardHeader>
-              <CardBody>
-                <Row>
-                  <Col md="12">
-                    <Link to="/Lista-projetos"> ◉ Projconnect </Link>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col md="12">
-                    <Link to="/Lista-projetos"> ◉ Projeto em Sistemas de Programação </Link>
-                  </Col>
-                </Row>
-              </CardBody>
-            </Card>
-          </Col>
         </Row>
+        <h4 className="historic-title">Histórico de pedidos realizados e propostos</h4>
+        <VerticalTimeline>
+          {Data.map((element) => (
+            <VerticalTimelineElement
+              key={element.key}
+              iconStyle={IconStyles}
+            >
+              <Row className="vertical-timeline-element-title">
+                <div className="project-title">
+                  {' '}
+                  {element.title}
+                  {' '}
+                  <Button
+                    className="historic-button"
+                    {...getToggleProps({
+                      onClick: () => setExpanded((prevExpanded) => !prevExpanded),
+                    })}
+                  >
+                    {isExpanded ? 'Ver menos' : 'Ver mais'}
+                  </Button>
+                </div>
+              </Row>
+              <p><img className="img" src={element.img} alt="Imagem" /></p>
+              <CardTitle tag="h5">Descrição</CardTitle>
+              <p className="description">
+                Descrição do projeto, lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </p>
+              <section {...getCollapseProps()}>
+                <CardTitle tag="h5">Linguagens e tecnologias</CardTitle>
+                <p className="description">
+                  Python, Figma
+                </p>
+                <CardTitle tag="h5">Outros requerimentos</CardTitle>
+                <p className="description">
+                  Requerimentos do projeto, ut quis lectus at ante ultricies laoreet.
+                </p>
+                <CardTitle tag="h5">Observações</CardTitle>
+                <p className="description">
+                  Observações sobre o projeto, nullam aliquam, diam eget egestas tristique.
+                </p>
+              </section>
+            </VerticalTimelineElement>
+          ))}
+        </VerticalTimeline>
       </div>
     </>
   );

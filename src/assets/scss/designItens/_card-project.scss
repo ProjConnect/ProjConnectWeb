@@ -1,4 +1,4 @@
-.card-user{
+.card-project{
 
     .author{
         text-align: center;
@@ -25,11 +25,12 @@
 	  }
 
     .image{
-        overflow: hidden;
-        height: 130px;
-        position: relative;
-		margin-bottom: 10px;
-    }
+      border-radius: 12px;
+      margin-bottom: 12px;
+      margin-top: 10px;
+      max-width: 230px;
+      max-height: 200px;
+  }
 
     .card-body{
         min-height: 260px;
