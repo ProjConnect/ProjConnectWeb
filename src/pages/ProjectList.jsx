@@ -4,6 +4,7 @@ import { Card, CardHeader, CardTitle, CardBody, Row, Col } from 'reactstrap';
 import img1 from '../assets/images/img1.jpg';
 import NavBar from '../components/Navbars/Navbar';
 import apiHandler from '../services/api';
+import { logout } from '../services/auth';
 
 function ProjectList() {
   const [projectList, setProjectList] = useState([]);
@@ -17,8 +18,9 @@ function ProjectList() {
         })
         .catch((error) => {
           console.log(error);
-          // redirecionar para página de erro dependendo do código
-          window.location.replace('/');
+          if (error.response.status === 401) {
+            logout();
+          }
         });
     };
 
