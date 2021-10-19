@@ -91,6 +91,7 @@ function EditProfile() {
                           value={form.firstName}
                           onChange={(e) => handleChange(e)}
                           type="text"
+                          required
                         />
                       </FormGroup>
                     </Col>
@@ -102,6 +103,7 @@ function EditProfile() {
                           value={form.lastName}
                           onChange={(e) => handleChange(e)}
                           type="text"
+                          required
                         />
                       </FormGroup>
                     </Col>
@@ -113,6 +115,7 @@ function EditProfile() {
                           value={form.username}
                           onChange={(e) => handleChange(e)}
                           type="text"
+                          required
                         />
                       </FormGroup>
                     </Col>
