@@ -175,6 +175,7 @@ function EditProfile() {
                           value={form.languages}
                           onChange={(e) => handleChange(e)}
                           type="textarea"
+                          disabled
                         />
                       </FormGroup>
                     </Col>
@@ -186,6 +187,7 @@ function EditProfile() {
                           value={form.technologies}
                           onChange={(e) => handleChange(e)}
                           type="textarea"
+                          disabled
                         />
                       </FormGroup>
                     </Col>
@@ -197,6 +199,7 @@ function EditProfile() {
                           value={form.otherSkills}
                           onChange={(e) => handleChange(e)}
                           type="textarea"
+                          disabled
                         />
                       </FormGroup>
                     </Col>
