@@ -1,5 +1,4 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Button,
@@ -21,6 +20,8 @@ import Data from '../data';
 import 'react-vertical-timeline-component/style.min.css';
 import avatar from '../assets/images/avatar.png';
 import NavBar from '../components/Navbars/Navbar';
+import apiHandler from '../services/api';
+import { logout } from '../services/auth';
 
 function User() {
   const [isExpanded, setExpanded] = useState(false);
@@ -30,6 +31,35 @@ function User() {
   const IconStyles = {
     background: '#06D6A0',
   };
+  const [form, setForm] = useState({
+    username: '',
+    email: '',
+    firstName: '',
+    lastName: '',
+    aboutMe: '',
+    github: '',
+    gitlab: '',
+    languages: '',
+    technologies: '',
+    otherSkills: '',
+  });
+
+  useEffect(() => {
+    const fetchData = () => {
+      apiHandler
+        .get('/my_profile')
+        .then((response) => {
+          setForm(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+          if (error.response.status === 401) {
+            logout();
+          }
+        });
+    };
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -48,46 +78,29 @@ function User() {
                     src={avatar}
                     alt="Avatar do usuário"
                   />
-                  <h5 className="title">Roberta Veronez</h5>
-                  <p className="description">@roberta123</p>
+                  <h5 className="title">{`${form.firstName} ${form.lastName}`}</h5>
+                  <p className="description">{`@${form.username}`}</p>
                 </div>
                 <p className="topic">Sobre mim</p>
-                <p className="description">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                  malesuada arcu.
-                </p>
+                <p className="description">{form.aboutMe}</p>
                 <p className="topic">Github</p>
                 <p className="description">
-                  <a
-                    href="https://github.com/"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    https://github.com/
+                  <a href={form.github} onClick={(e) => e.preventDefault()}>
+                    {form.github}
                   </a>
                 </p>
                 <p className="topic">Gitlab</p>
                 <p className="description">
-                  <a
-                    href="https://gitlab.com/"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    https://gitlab.com/
+                  <a href={form.gitlab} onClick={(e) => e.preventDefault()}>
+                    {form.gitlab}
                   </a>
                 </p>
                 <p className="topic">Conhecimento em linguagens</p>
-                <p className="description">
-                  Vestibulum urna massa, interdum sit amet tortor vitae,
-                  sagittis ultricies ligula.
-                </p>
+                <p className="description">{form.languages}</p>
                 <p className="topic">Conhecimento em tecnologias</p>
-                <p className="description">
-                  Donec nisi, vitae vehicula nulla facilisis sed. Proin vitae
-                  quam dui.
-                </p>
+                <p className="description">{form.technologies}</p>
                 <p className="topic">Conhecimentos gerais</p>
-                <p className="description">
-                  Phasellus id consectetur sem, non sollicitudin ante.
-                </p>
+                <p className="description">{form.otherSkills}</p>
               </CardBody>
               <CardFooter>
                 <hr />
