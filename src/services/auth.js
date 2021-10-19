@@ -7,7 +7,8 @@ export const logout = () => {
     .then(() => {
       window.location.assign('/');
     })
+    // eslint-disable-next-line no-unused-vars
     .catch((error) => {
-      console.log(error);
+      // console.log(error);
     });
 };

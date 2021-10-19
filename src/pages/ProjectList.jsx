@@ -7,17 +7,17 @@ import apiHandler from '../services/api';
 import { logout } from '../services/auth';
 
 function ProjectList() {
+  // eslint-disable-next-line no-unused-vars
   const [projectList, setProjectList] = useState([]);
   useEffect(() => {
     const fetchData = () => {
       apiHandler
         .get('/posts')
         .then((response) => {
-          console.log(projectList);
           setProjectList(response.data);
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
           if (error.response.status === 401) {
             logout();
           }

@@ -52,7 +52,7 @@ function User() {
           setForm(response.data);
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
           if (error.response.status === 401) {
             logout();
           }

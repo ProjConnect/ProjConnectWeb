@@ -41,12 +41,14 @@ function EditProfile() {
   const handleSubmit = () => {
     apiHandler
       .post('/profile/update', form)
+      // eslint-disable-next-line no-unused-vars
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         window.location.replace('/profile');
       })
+      // eslint-disable-next-line no-unused-vars
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         // redirecionar para página de erro dependendo do código
       });
   };
@@ -59,7 +61,7 @@ function EditProfile() {
           setForm(response.data);
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
           if (error.response.status === 401) {
             logout();
           }
