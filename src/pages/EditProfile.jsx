@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import {
   Button,
   Card,
@@ -13,10 +12,67 @@ import {
   Row,
   Col,
 } from 'reactstrap';
+import NavBar from '../components/Navbars/Navbar';
+import apiHandler from '../services/api';
+import { logout } from '../services/auth';
 
 function EditProfile() {
+  const [form, setForm] = useState({
+    username: '',
+    email: '',
+    firstName: '',
+    lastName: '',
+    aboutMe: '',
+    github: '',
+    gitlab: '',
+    languages: '',
+    technologies: '',
+    otherSkills: '',
+  });
+
+  // Handlers
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.id]: e.target.value,
+    });
+  };
+
+  const handleSubmit = () => {
+    apiHandler
+      .post('/profile/update', form)
+      // eslint-disable-next-line no-unused-vars
+      .then((response) => {
+        // console.log(response.data);
+        window.location.replace('/profile');
+      })
+      // eslint-disable-next-line no-unused-vars
+      .catch((error) => {
+        // console.log(error);
+        // redirecionar para página de erro dependendo do código
+      });
+  };
+
+  useEffect(() => {
+    const fetchData = () => {
+      apiHandler
+        .get('/my_profile')
+        .then((response) => {
+          setForm(response.data);
+        })
+        .catch((error) => {
+          // console.log(error);
+          if (error.response.status === 401) {
+            logout();
+          }
+        });
+    };
+    fetchData();
+  }, []);
+
   return (
     <>
+      <NavBar />
       <div className="content">
         <Row>
           <Col md="12">
@@ -31,8 +87,11 @@ function EditProfile() {
                       <FormGroup>
                         <label>Nome</label>
                         <Input
-                          defaultValue="Roberta"
+                          id="firstName"
+                          value={form.firstName}
+                          onChange={(e) => handleChange(e)}
                           type="text"
+                          required
                         />
                       </FormGroup>
                     </Col>
@@ -40,8 +99,11 @@ function EditProfile() {
                       <FormGroup>
                         <label>Sobrenome</label>
                         <Input
-                          defaultValue="Veronez"
+                          id="lastName"
+                          value={form.lastName}
+                          onChange={(e) => handleChange(e)}
                           type="text"
+                          required
                         />
                       </FormGroup>
                     </Col>
@@ -49,19 +111,23 @@ function EditProfile() {
                       <FormGroup>
                         <label>Usuário</label>
                         <Input
-                          defaultValue="roberta123"
+                          id="username"
+                          value={form.username}
+                          onChange={(e) => handleChange(e)}
                           type="text"
+                          required
                         />
                       </FormGroup>
                     </Col>
                     <Col className="pl-1" md="3">
                       <FormGroup>
-                        <label htmlFor="exampleInputEmail1">
-                          E-mail
-                        </label>
+                        <label htmlFor="exampleInputEmail1">E-mail</label>
                         <Input
-                          defaultValue="roberta123@dac.unicamp.br"
+                          id="email"
+                          value={form.email}
+                          onChange={(e) => handleChange(e)}
                           type="email"
+                          readOnly
                         />
                       </FormGroup>
                     </Col>
@@ -71,8 +137,10 @@ function EditProfile() {
                       <FormGroup>
                         <label>Sobre mim</label>
                         <Input
+                          id="aboutMe"
+                          value={form.aboutMe}
+                          onChange={(e) => handleChange(e)}
                           type="textarea"
-                          defaultValue="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin malesuada arcu a ex tempus, sed gravida magna sagittis. Morbi in euismod mi, vel cursus turpis."
                         />
                       </FormGroup>
                     </Col>
@@ -82,7 +150,9 @@ function EditProfile() {
                       <FormGroup>
                         <label>Github</label>
                         <Input
-                          defaultValue="https://github.com/"
+                          id="github"
+                          value={form.github}
+                          onChange={(e) => handleChange(e)}
                           type="text"
                         />
                       </FormGroup>
@@ -91,7 +161,9 @@ function EditProfile() {
                       <FormGroup>
                         <label>Gitlab</label>
                         <Input
-                          defaultValue="https://gitlab.com/"
+                          id="gitlab"
+                          value={form.gitlab}
+                          onChange={(e) => handleChange(e)}
                           type="text"
                         />
                       </FormGroup>
@@ -102,8 +174,11 @@ function EditProfile() {
                       <FormGroup>
                         <label>Conhecimento em linguagens</label>
                         <Input
+                          id="languages"
+                          value={form.languages}
+                          onChange={(e) => handleChange(e)}
                           type="textarea"
-                          defaultValue="Vestibulum urna massa, interdum sit amet tortor vitae, sagittis ultricies ligula."
+                          disabled
                         />
                       </FormGroup>
                     </Col>
@@ -111,8 +186,11 @@ function EditProfile() {
                       <FormGroup>
                         <label>Conhecimento em tecnologias</label>
                         <Input
+                          id="technologies"
+                          value={form.technologies}
+                          onChange={(e) => handleChange(e)}
                           type="textarea"
-                          defaultValue="Donec nisi, vitae vehicula nulla facilisis sed. Proin vitae quam dui."
+                          disabled
                         />
                       </FormGroup>
                     </Col>
@@ -120,8 +198,11 @@ function EditProfile() {
                       <FormGroup>
                         <label>Conhecimentos gerais</label>
                         <Input
+                          id="otherSkills"
+                          value={form.otherSkills}
+                          onChange={(e) => handleChange(e)}
                           type="textarea"
-                          defaultValue="Phasellus id consectetur sem, non sollicitudin ante. Aliquam molestie fringilla velit, vitae feugiat lacus ullamcorper quis."
+                          disabled
                         />
                       </FormGroup>
                     </Col>
@@ -129,13 +210,9 @@ function EditProfile() {
                   <div className="button-container">
                     <Row>
                       <div className="update ml-auto mr-auto">
-                        <Link to="/Perfil">
-                          <Button
-                            className="button-round"
-                          >
-                            Atualizar perfil
-                          </Button>
-                        </Link>
+                        <Button className="button-round" onClick={handleSubmit}>
+                          Atualizar perfil
+                        </Button>
                       </div>
                     </Row>
                   </div>

@@ -1,24 +1,20 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+
 import ProjectList from './pages/ProjectList';
 import LandingPage from './pages/LandingPage/LandingPage';
+import LoginPage from './pages/LoginPage/LoginPage';
 import User from './pages/User';
 import EditProfile from './pages/EditProfile';
-import NavBar from './components/Navbars/Navbar';
 
 export const Routes = () => (
-  <div>
-    <Route exact path="/">
-      <Redirect to="/Login" />
-    </Route>
-    <NavBar />
-    <Switch>
-      <Route exact path="/Lista-projetos" component={ProjectList} />
-      <Route exact path="/Perfil" component={User} />
-      <Route exact path="/Editar-perfil" component={EditProfile} />
-      <Route exact path="/Login" component={LandingPage} />
-    </Switch>
-  </div>
+  <Switch>
+    <Route exact path="/" component={LandingPage} />
+    <Route exact path="/project/list" component={ProjectList} />
+    <Route exact path="/profile" component={User} />
+    <Route exact path="/profile/edit" component={EditProfile} />
+    <Route exact path="/login" component={LoginPage} />
+  </Switch>
 );
 
 export default Routes;
