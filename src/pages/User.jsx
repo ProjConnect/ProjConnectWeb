@@ -121,45 +121,49 @@ function User() {
             </Card>
           </Col>
         </Row>
-        <h4 className="historic-title">Histórico de pedidos realizados e propostos</h4>
+        <h4 className="historic-title">
+          Histórico de pedidos realizados e propostos
+        </h4>
         <VerticalTimeline>
           {Data.map((element) => (
-            <VerticalTimelineElement
-              key={element.key}
-              iconStyle={IconStyles}
-            >
+            <VerticalTimelineElement key={element.key} iconStyle={IconStyles}>
               <Row className="vertical-timeline-element-title">
                 <div className="project-title">
-                  {' '}
-                  {element.title}
-                  {' '}
+                  {` ${element.title} `}
                   <Button
                     className="historic-button"
+                    // eslint-disable-next-line react/jsx-props-no-spreading
                     {...getToggleProps({
-                      onClick: () => setExpanded((prevExpanded) => !prevExpanded),
+                      onClick: () => {
+                        setExpanded((prevExpanded) => !prevExpanded);
+                      },
                     })}
                   >
                     {isExpanded ? 'Ver menos' : 'Ver mais'}
                   </Button>
                 </div>
               </Row>
-              <p><img className="img" src={element.img} alt="Imagem" /></p>
+              <p>
+                <img className="img" src={element.img} alt="Imagem" />
+              </p>
               <CardTitle tag="h5">Descrição</CardTitle>
               <p className="description">
-                Descrição do projeto, lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Descrição do projeto, lorem ipsum dolor sit amet, consectetur
+                adipiscing elit.
               </p>
+              {/* eslint-disable-next-line react/jsx-props-no-spreading */}
               <section {...getCollapseProps()}>
                 <CardTitle tag="h5">Linguagens e tecnologias</CardTitle>
-                <p className="description">
-                  Python, Figma
-                </p>
+                <p className="description">Python, Figma</p>
                 <CardTitle tag="h5">Outros requerimentos</CardTitle>
                 <p className="description">
-                  Requerimentos do projeto, ut quis lectus at ante ultricies laoreet.
+                  Requerimentos do projeto, ut quis lectus at ante ultricies
+                  laoreet.
                 </p>
                 <CardTitle tag="h5">Observações</CardTitle>
                 <p className="description">
-                  Observações sobre o projeto, nullam aliquam, diam eget egestas tristique.
+                  Observações sobre o projeto, nullam aliquam, diam eget egestas
+                  tristique.
                 </p>
               </section>
             </VerticalTimelineElement>
