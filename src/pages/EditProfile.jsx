@@ -127,7 +127,7 @@ function EditProfile() {
                           value={form.email}
                           onChange={(e) => handleChange(e)}
                           type="email"
-                          disabled
+                          readOnly
                         />
                       </FormGroup>
                     </Col>
