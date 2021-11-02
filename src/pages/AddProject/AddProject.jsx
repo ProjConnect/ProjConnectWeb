@@ -1,4 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable react/jsx-wrap-multilines */
+/* eslint-disable  operator-linebreak */
 import React, { useState, useEffect } from 'react';
 import '../LandingPage/LandingPage.css';
 import {
@@ -64,7 +66,9 @@ const tags = [
 ];
 
 function AddProject() {
-  const [checkedBoxes, setCheckedBoxes] = useState(new Array(tags.length).fill(false));
+  const [checkedBoxes, setCheckedBoxes] = useState(
+    new Array(tags.length).fill(false),
+  );
   const [subject, setSubject] = useState('');
   const [ownerId, setOwnerId] = useState('');
   const [supporters, setSupporters] = useState('');
@@ -76,13 +80,16 @@ function AddProject() {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    apiHandler.get('/my_profile').then((response) => {
-      setOwnerId(response.data.username);
-    }).catch((er) => {
-      if (er.response.status === 401) {
-        logout();
-      }
-    });
+    apiHandler
+      .get('/my_profile')
+      .then((response) => {
+        setOwnerId(response.data.username);
+      })
+      .catch((er) => {
+        if (er.response.status === 401) {
+          logout();
+        }
+      });
   }, []);
 
   const boxStyle = {
@@ -99,39 +106,43 @@ function AddProject() {
 
   function handleClick() {
     const t = tags.filter((element, index) => checkedBoxes[index]);
-    const z = requirements.split(/[,|]+/).map((str) => str.trim());
-    const requiredFieldsFilled = subject.length > 0 && body.length > 0 && (
-      t.length > 0 || z.length > 0);
+    const r = requirements.split(/[,|]+/).map((str) => str.trim());
+    let requiredFieldsFilled = subject.length * body.length > 0;
+    requiredFieldsFilled =
+      requiredFieldsFilled && (t.length > 0 || r.length > 0);
     setMissingFields(!requiredFieldsFilled);
     if (requiredFieldsFilled) {
       const newPost = {
         subject,
         ownerId,
-        devId: '',
+        devId: [ownerId],
         body,
         supporters: supporters.split(/[,|]+/).map((str) => str.trim()),
         isArchived: false,
-        tags: [...t, ...z],
+        tags: [...t, ...r],
         course,
       };
-      apiHandler.post('/new-post', newPost).then(() => {
-        setError(false);
-        window.location.replace('/project/list');
-      }).catch((er) => {
-        setError(true);
-        if (er.response) {
-          switch (er.response.status) {
-            case 201:
-              window.location.replace('/project/list');
-              break;
-            case 401:
-              logout();
-              break;
-            default:
-              break;
+      apiHandler
+        .post('/new-post', newPost)
+        .then(() => {
+          setError(false);
+          window.location.replace('/project/list');
+        })
+        .catch((er) => {
+          setError(true);
+          if (er.response) {
+            switch (er.response.status) {
+              case 201:
+                window.location.replace('/project/list');
+                break;
+              case 401:
+                logout();
+                break;
+              default:
+                break;
+            }
           }
-        }
-      });
+        });
     }
   }
 
@@ -190,7 +201,7 @@ function AddProject() {
                       <Box sx={boxStyle}>
                         {tags.slice(0, tags.length / 3).map((tag, index) => (
                           <FormControlLabel
-                            control={(
+                            control={
                               <Checkbox
                                 onChange={() => handleChange(index)}
                                 sx={{
@@ -199,7 +210,7 @@ function AddProject() {
                                   },
                                 }}
                               />
-                            )}
+                            }
                             label={tag}
                           />
                         ))}
@@ -207,40 +218,44 @@ function AddProject() {
                     </Col>
                     <Col md="4">
                       <Box sx={boxStyle}>
-                        {tags.slice(tags.length / 3, 2 * (tags.length / 3)).map((tag, index) => (
-                          <FormControlLabel
-                            control={(
-                              <Checkbox
-                                onChange={() => handleChange(index)}
-                                sx={{
-                                  '&.Mui-checked': {
-                                    color: '#EE4A68',
-                                  },
-                                }}
-                              />
-                            )}
-                            label={tag}
-                          />
-                        ))}
+                        {tags
+                          .slice(tags.length / 3, 2 * (tags.length / 3))
+                          .map((tag, index) => (
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  onChange={() => handleChange(index)}
+                                  sx={{
+                                    '&.Mui-checked': {
+                                      color: '#EE4A68',
+                                    },
+                                  }}
+                                />
+                              }
+                              label={tag}
+                            />
+                          ))}
                       </Box>
                     </Col>
                     <Col md="4">
                       <Box sx={boxStyle}>
-                        {tags.slice(2 * (tags.length / 3), tags.length).map((tag, index) => (
-                          <FormControlLabel
-                            control={(
-                              <Checkbox
-                                onChange={() => handleChange(index)}
-                                sx={{
-                                  '&.Mui-checked': {
-                                    color: '#EE4A68',
-                                  },
-                                }}
-                              />
-                            )}
-                            label={tag}
-                          />
-                        ))}
+                        {tags
+                          .slice(2 * (tags.length / 3), tags.length)
+                          .map((tag, index) => (
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  onChange={() => handleChange(index)}
+                                  sx={{
+                                    '&.Mui-checked': {
+                                      color: '#EE4A68',
+                                    },
+                                  }}
+                                />
+                              }
+                              label={tag}
+                            />
+                          ))}
                       </Box>
                     </Col>
                   </Row>
@@ -252,7 +267,9 @@ function AddProject() {
                           type="textarea"
                           placeholder="Kotlin, PHP, Unity"
                           value={requirements}
-                          onChange={(event) => setRequirements(event.target.value)}
+                          onChange={(event) => {
+                            setRequirements(event.target.value);
+                          }}
                         />
                       </FormGroup>
                     </Col>
@@ -263,7 +280,9 @@ function AddProject() {
                           type="textarea"
                           placeholder="username, username"
                           value={supporters}
-                          onChange={(event) => setSupporters(event.target.value)}
+                          onChange={(event) => {
+                            setSupporters(event.target.value);
+                          }}
                         />
                       </FormGroup>
                     </Col>
@@ -274,7 +293,8 @@ function AddProject() {
                         <label>Imagem ou Vídeo</label>
                         <Input type="file" name="file" id="exampleFile" />
                         <FormText color="muted">
-                          Selecione uma imagem ou vídeo que represente o projeto.
+                          Selecione uma imagem ou vídeo que represente o
+                          projeto.
                         </FormText>
                       </FormGroup>
                     </Col>
@@ -287,7 +307,9 @@ function AddProject() {
                           type="textarea"
                           placeholder="Observações sobre o projeto"
                           value={observation}
-                          onChange={(event) => setObservations(event.target.value)}
+                          onChange={(event) => {
+                            setObservations(event.target.value);
+                          }}
                         />
                       </FormGroup>
                     </Col>
@@ -303,10 +325,13 @@ function AddProject() {
                         </Button>
                         {error && (
                           <p>
-                            Ocorreu um erro ao processar a requisição. Verifique os campos.
+                            Ocorreu um erro ao processar a requisição. Verifique
+                            os campos.
                           </p>
                         )}
-                        {missingFields && <p>Há campos obrigtórios faltantes</p>}
+                        {missingFields && (
+                          <p>Há campos obrigtórios faltantes</p>
+                        )}
                       </div>
                     </Row>
                   </div>
