@@ -19,7 +19,6 @@ import {
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Box from '@mui/material/Box';
-// import MUIButton from '@mui/material/Button';
 import apiHandler from '../../services/api';
 import { logout } from '../../services/auth';
 
