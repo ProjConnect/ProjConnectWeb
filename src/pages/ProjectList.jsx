@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Card, CardHeader, CardTitle, CardBody, Row, Col } from 'reactstrap';
+import { Card, CardHeader, CardTitle, CardBody, Row, Col, Button } from 'reactstrap';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from 'react-router-dom';
 import img1 from '../assets/images/img1.jpg';
 import NavBar from '../components/Navbars/Navbar';
 import apiHandler from '../services/api';
@@ -65,6 +67,20 @@ function ProjectList() {
                   Observações sobre o projeto, nullam aliquam, diam eget egestas
                   tristique.
                 </p>
+                <Row>
+                  <Col className="ml-auto">
+                    <div className="update ml-auto mr-auto">
+                      <Button className="button-apply">
+                        Tenho interesse
+                      </Button>
+                      <Link to="/project/recommend">
+                        <Button className="button-recommend">
+                          Recomendar Dev
+                        </Button>
+                      </Link>
+                    </div>
+                  </Col>
+                </Row>
               </CardBody>
             </Card>
           </Col>
