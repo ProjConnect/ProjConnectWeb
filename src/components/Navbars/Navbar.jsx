@@ -21,6 +21,11 @@ function Header() {
         </Col>
         <Col md="2">
           <div className="nav-link">
+            <Link to="/project/new">Adicionar projeto</Link>
+          </div>
+        </Col>
+        <Col md="2">
+          <div className="nav-link">
             <Link to="/project/list">Lista de projetos</Link>
           </div>
         </Col>
