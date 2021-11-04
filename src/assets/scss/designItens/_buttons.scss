@@ -29,3 +29,47 @@
         padding: 11px -1px  22px -1px;
     }
 }
+
+.button-apply {
+    width: 130px;
+    border-width: 1px;
+    margin-top: 5px;
+    margin-left: 15px;
+    border-radius: 30px;
+    padding-right: 5px;
+    padding-left: 5px;
+    background-color: #EE4A68;
+    color: white;
+    &.button-simple {
+        padding: 11px -1px  22px -1px;
+    }
+}
+
+.button-recommend {
+    width: 130px;
+    margin-top: 5px;
+    border-width: 1px;
+    margin-left: 22px;
+    border-radius: 30px;
+    padding-right: 5px;
+    padding-left: 5px;
+    background-color: #642597;
+    color: white;
+    &.button-simple {
+        padding: 11px -1px  22px -1px;
+    }
+}
+
+.button-cancel {
+    width: 175px;
+    margin-left: 25px;
+    border-width: 1px;
+    border-radius: 30px;
+    padding-right: 5px;
+    padding-left: 5px;
+    background-color: #6b6b6b;
+    color: white;
+    &.button-simple {
+        padding: 11px -1px  22px -1px;
+    }
+}
