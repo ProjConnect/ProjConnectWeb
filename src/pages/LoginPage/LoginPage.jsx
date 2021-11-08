@@ -5,22 +5,31 @@ import GoogleButton from 'react-google-button';
 import './LoginPage.css';
 import logo from '../../assets/images/logo_transparent.png';
 import apiHandler from '../../services/api';
+import { login, logged } from '../../services/auth';
 
 function LoginPage() {
   const [isLogged, setIsLogged] = useState(false);
 
   useEffect(() => {
-    apiHandler
-      .get('/status')
-      .then((response) => {
-        if (response.data === 'logged') {
-          setIsLogged(true);
-        }
-      })
-      // eslint-disable-next-line no-unused-vars
-      .catch((error) => {
-        // console.log(error);
-      });
+    const fetchStatus = () => {
+      apiHandler
+        .get('/status')
+        .then((response) => {
+          if (response.data === 'logged') {
+            setIsLogged(true);
+            login();
+          }
+        })
+        // eslint-disable-next-line no-unused-vars
+        .catch((error) => {
+          // console.log(error);
+        });
+    };
+    if (logged()) {
+      setIsLogged(true);
+    } else {
+      fetchStatus();
+    }
   }, []);
 
   if (isLogged) {
