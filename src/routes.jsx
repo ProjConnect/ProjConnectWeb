@@ -13,7 +13,7 @@ export const Routes = () => (
   <Switch>
     <Route exact path="/" component={LandingPage} />
     <Route exact path="/project/list" component={ProjectList} />
-    <Route exact path="/project/recommend" component={ProjectRecommend} />
+    <Route exact path="/project/recommend/:name" component={ProjectRecommend} />
     <Route exact path="/profile" component={User} />
     <Route exact path="/profile/edit" component={EditProfile} />
     <Route exact path="/project/new" component={AddProject} />

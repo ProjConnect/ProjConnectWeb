@@ -44,6 +44,7 @@ function ProjectList() {
     apiHandler.post('request/create', {
       post,
       devId,
+      description: '',
     });
   }
 
@@ -99,7 +100,7 @@ function ProjectList() {
                           >
                             Tenho interesse
                           </Button>
-                          <Link to="/project/recommend">
+                          <Link to={`/project/recommend/${post.subject}`}>
                             <Button className="button-recommend">
                               Recomendar Dev
                             </Button>
