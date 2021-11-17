@@ -48,13 +48,14 @@ function TimeLine() {
 
   return (
     <VerticalTimeline>
-      {projectListHistory &&
-        projectListHistory.map((element) => {
+      {projectListHistory
+        && projectListHistory.map((element) => {
           const img = images[counter % 5];
           incrementCounter(counter + 1);
 
           return (
-            <VerticalTimelineElement key={element.key} iconStyle={IconStyles}>
+            // eslint-disable-next-line dot-notation
+            <VerticalTimelineElement key={element['_id']} iconStyle={IconStyles}>
               <Row className="vertical-timeline-element-title">
                 <div className="project-title">
                   {` ${element.subject} `}
