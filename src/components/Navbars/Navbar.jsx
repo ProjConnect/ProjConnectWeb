@@ -34,13 +34,13 @@ function Header() {
             <Link to="/requests">Solicitações de projeto</Link>
           </div>
         </Col>
-        <Col md="2">
+        <Col md={checkMod() ? '1' : '2'}>
           <div className="nav-link">
             <Link to="/profile">Meu perfil</Link>
           </div>
         </Col>
         {checkMod() ? (
-          <Col md="2">
+          <Col md="1">
             <div className="nav-link">
               <Link to="/mod">Moderador</Link>
             </div>
