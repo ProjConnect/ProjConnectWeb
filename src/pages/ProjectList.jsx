@@ -37,13 +37,25 @@ function ProjectList() {
     fetchData();
   }, []);
 
+  async function handleInterestRequest(postId) {
+    const userInfo = (await apiHandler.get('/my_profile')).data;
+    const devId = userInfo.username;
+    const post = postId;
+    apiHandler.post('request/create', {
+      post,
+      devId,
+      description: '',
+    });
+  }
+
   return (
     <>
       <NavBar />
       <div className="content">
         <Row>
-          {projectList
-            && projectList.map((post) => (
+          {/* eslint-disable-next-line operator-linebreak */}
+          {projectList &&
+            projectList.map((post) => (
               <Col md="4">
                 <Card className="card-project">
                   <CardBody>
@@ -81,10 +93,14 @@ function ProjectList() {
                     <Row>
                       <Col className="ml-auto">
                         <div className="update ml-auto mr-auto">
-                          <Button className="button-apply">
+                          <Button
+                            // eslint-disable-next-line dot-notation
+                            onCLick={() => handleInterestRequest(post['_id'])}
+                            className="button-apply"
+                          >
                             Tenho interesse
                           </Button>
-                          <Link to="/project/recommend">
+                          <Link to={`/project/recommend/${post.subject}`}>
                             <Button className="button-recommend">
                               Recomendar Dev
                             </Button>

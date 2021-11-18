@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import {
   Button,
@@ -17,8 +18,9 @@ import NavBar from '../../components/Navbars/Navbar';
 import apiHandler from '../../services/api';
 import { logout } from '../../services/auth';
 
-function RecommendPage() {
+function RecommendPage({ match }) {
   const [form, setForm] = useState({
+    name: match.params.name,
     username: '',
     aboutDev: '',
   });
@@ -31,22 +33,18 @@ function RecommendPage() {
     });
   };
 
-  /*
-  const handleSubmit = () => {
-    apiHandler
-      .post('/profile/update', form)
-      // eslint-disable-next-line no-unused-vars
-      .then((response) => {
-        // console.log(response.data);
-        window.location.replace('/profile');
-      })
-      // eslint-disable-next-line no-unused-vars
-      .catch((error) => {
-        // console.log(error);
-        // redirecionar para página de erro dependendo do código
-      });
+  const handleSubmit = async () => {
+    if (form.username.length === 0) {
+      return;
+    }
+    const post = await apiHandler.get(`search/post/name/${form.name}`);
+    apiHandler.post('request/create', {
+      post: post.postId,
+      devId: form.username,
+      description: form.aboutDev,
+    });
   };
-*/
+
   useEffect(() => {
     const fetchData = () => {
       apiHandler
@@ -72,11 +70,18 @@ function RecommendPage() {
           <Col md="12">
             <Card className="card-user">
               <Col md="6">
-                <img className="image" src={recommendimage} alt="Recomendação de dev" />
+                <img
+                  className="image"
+                  src={recommendimage}
+                  alt="Recomendação de dev"
+                />
               </Col>
               <CardTitle tag="h3">Recomendar Dev</CardTitle>
               <br />
-              <CardTitle tag="h5">Conhece algum(a) Dev que se encaixa nesse projeto? Faça sua recomendação! ♥  </CardTitle>
+              <CardTitle tag="h5">
+                Conhece algum(a) Dev que se encaixa nesse projeto? Faça sua
+                recomendação! ♥
+              </CardTitle>
               <CardBody>
                 <Form>
                   <Row>
@@ -85,7 +90,7 @@ function RecommendPage() {
                         <label>Nome do projeto</label>
                         <Input
                           id="projectName"
-                          value="Projeto 1"
+                          value={form.name}
                           onChange={(e) => handleChange(e)}
                           type="text"
                           readOnly
@@ -119,14 +124,15 @@ function RecommendPage() {
                       <Row>
                         <div className="update ml-auto mr-auto">
                           <Link to="/project/list">
-                            <Button className="button-round">
+                            <Button
+                              onClick={() => handleSubmit()}
+                              className="button-round"
+                            >
                               Enviar recomendação
                             </Button>
                           </Link>
                           <Link to="/project/list">
-                            <Button className="button-cancel">
-                              Cancelar
-                            </Button>
+                            <Button className="button-cancel">Cancelar</Button>
                           </Link>
                         </div>
                       </Row>

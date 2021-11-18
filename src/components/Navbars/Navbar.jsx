@@ -31,6 +31,11 @@ function Header() {
         </Col>
         <Col md="2">
           <div className="nav-link">
+            <Link to="/requests">Solicitações de projeto</Link>
+          </div>
+        </Col>
+        <Col md="2">
+          <div className="nav-link">
             <Link to="/profile">Meu perfil</Link>
           </div>
         </Col>
