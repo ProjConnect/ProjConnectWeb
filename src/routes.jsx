@@ -9,6 +9,7 @@ import User from './pages/User';
 import EditProfile from './pages/EditProfile';
 import AddProject from './pages/AddProject/AddProject';
 import PostRequestsPage from './pages/PostRequests/PostRequests';
+import ModeratorPage from './pages/ModeratorPage/ModeratorPage';
 
 export const Routes = () => (
   <Switch>
@@ -20,6 +21,7 @@ export const Routes = () => (
     <Route exact path="/project/new" component={AddProject} />
     <Route exact path="/requests" component={PostRequestsPage} />
     <Route exact path="/login" component={LoginPage} />
+    <Route exact path="/mod" component={ModeratorPage} />
   </Switch>
 );
 
