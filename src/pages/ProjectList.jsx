@@ -37,15 +37,23 @@ function ProjectList() {
     fetchData();
   }, []);
 
-  async function handleInterestRequest(postId) {
-    const userInfo = (await apiHandler.get('/my_profile')).data;
-    const devId = userInfo.username;
-    const post = postId;
-    apiHandler.post('request/create', {
-      post,
-      devId,
-      description: '',
-    });
+  function handleInterestRequest(postId) {
+    apiHandler.get('/my_profile')
+      .then((response) => {
+        const devId = response.data.username;
+        const post = postId;
+        apiHandler.post('/request/create', {
+          post,
+          devId,
+          description: '',
+        });
+      })
+      .catch((error) => {
+      // console.log(error);
+        if (error.response.status === 401) {
+          logout();
+        }
+      });
   }
 
   return (
