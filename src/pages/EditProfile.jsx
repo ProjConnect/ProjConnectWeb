@@ -1,4 +1,4 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable jsx-a11y/label-has-associated-control, object-curly-newline */
 import React, { useEffect, useState } from 'react';
 import {
   Button,
@@ -12,11 +12,22 @@ import {
   Row,
   Col,
 } from 'reactstrap';
+import {
+  Grid,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  Typography,
+} from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
+import Avatars from '../components/Avatars/Avatars';
 import NavBar from '../components/Navbars/Navbar';
 import apiHandler from '../services/api';
 import { logout } from '../services/auth';
 
 function EditProfile() {
+  const avatars = Avatars;
+  const [dialog, setDialog] = useState(false);
   const [form, setForm] = useState({
     username: '',
     email: '',
@@ -28,6 +39,7 @@ function EditProfile() {
     languages: '',
     technologies: '',
     otherSkills: '',
+    avatar: null,
   });
 
   // Handlers
@@ -107,7 +119,7 @@ function EditProfile() {
                         />
                       </FormGroup>
                     </Col>
-                    <Col className="px-1" md="3">
+                    <Col className="px-1" md="2">
                       <FormGroup>
                         <label>Usuário</label>
                         <Input
@@ -119,7 +131,7 @@ function EditProfile() {
                         />
                       </FormGroup>
                     </Col>
-                    <Col className="pl-1" md="3">
+                    <Col className="pl-1" md="2">
                       <FormGroup>
                         <label htmlFor="exampleInputEmail1">E-mail</label>
                         <Input
@@ -129,6 +141,16 @@ function EditProfile() {
                           type="email"
                           readOnly
                         />
+                      </FormGroup>
+                    </Col>
+                    <Col className="pl-1" md="2">
+                      <FormGroup>
+                        <Button
+                          className="button-round-centered"
+                          onClick={() => setDialog(true)}
+                        >
+                          Escolher Avatar
+                        </Button>
                       </FormGroup>
                     </Col>
                   </Row>
@@ -222,6 +244,44 @@ function EditProfile() {
           </Col>
         </Row>
       </div>
+      <Dialog open={dialog} onClose={() => setDialog(false)}>
+        <DialogTitle>
+          <Grid container>
+            <Grid xs={11}>
+              <Typography variant="h3">Selecione o avatar desejado</Typography>
+            </Grid>
+            <Grid item xs={1}>
+              <Button onClick={() => setDialog(false)}>
+                <CloseIcon />
+              </Button>
+            </Grid>
+          </Grid>
+        </DialogTitle>
+        <DialogContent>
+          <Grid container xs={12} spacing={2}>
+            {/* eslint-disable-next-line arrow-body-style */}
+            {avatars.map((image, index) => {
+              return (
+                <Grid
+                  item
+                  xs={4}
+                  onClick={() => setForm({ ...form, avatar: index })}
+                >
+                  <img
+                    src={image}
+                    alt="Avatar do usuário"
+                    style={{
+                      height: '124px',
+                      width: '124px',
+                      background: form.avatar === index ? 'black' : 'white',
+                    }}
+                  />
+                </Grid>
+              );
+            })}
+          </Grid>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }
