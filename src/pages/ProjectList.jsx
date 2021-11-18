@@ -1,3 +1,4 @@
+/* eslint-disable no-alert, operator-linebreak */
 import React, { useEffect, useState } from 'react';
 import {
   Card,
@@ -9,28 +10,78 @@ import {
   Button,
 } from 'reactstrap';
 
+import {
+  Grid,
+  Dialog,
+  DialogTitle,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+} from '@material-ui/core';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
+import ReportIcon from '@material-ui/icons/Report';
 import img1 from '../assets/images/img1.jpg';
 import NavBar from '../components/Navbars/Navbar';
 import apiHandler from '../services/api';
-import { logout } from '../services/auth';
+import { checkMod, login, logout, modAccess } from '../services/auth';
 
 function ProjectList() {
-  // eslint-disable-next-line no-unused-vars
   const [projectList, setProjectList] = useState(null);
+  const [dialog, setDialog] = useState(false);
+  // eslint-disable-next-line object-curly-newline
+  const [report, setReport] = useState({});
+
+  const handleSelect = (post) => {
+    setReport(post);
+    setDialog(true);
+  };
+
+  const handleClose = () => {
+    // eslint-disable-next-line object-curly-newline
+    setReport({});
+    setDialog(false);
+  };
+
+  const handleReport = () => {
+    apiHandler
+      .post('/report/post', report)
+      .then(() => {
+        alert('Denúncia foi registrada');
+      })
+      .catch(() => {
+        // console.log(error);
+        alert('Algo deu errado');
+      });
+    handleClose();
+  };
+
   useEffect(() => {
     const fetchData = () => {
       apiHandler
         .get('/posts')
         .then((response) => {
           setProjectList(response.data);
+          login();
         })
         .catch((error) => {
           // console.log(error);
           if (error.response.status === 401) {
             logout();
           }
+        });
+      apiHandler
+        .get('/access')
+        .then(() => {
+          if (!checkMod()) {
+            modAccess();
+            window.location.reload();
+          }
+        })
+        // eslint-disable-next-line no-unused-vars
+        .catch((error) => {
+          // console.log(error);
         });
     };
 
@@ -53,17 +104,28 @@ function ProjectList() {
       <NavBar />
       <div className="content">
         <Row>
-          {/* eslint-disable-next-line operator-linebreak */}
           {projectList &&
             projectList.map((post) => (
-              <Col md="4">
+              <Col md="3">
                 <Card className="card-project">
                   <CardBody>
                     <div className="card-title-group">
-                      <h4 className="card-title">{post.subject}</h4>
-                      <div className="card-date">
-                        Prazo de entrega: 20/10/2021
-                      </div>
+                      <Grid container alignItems="center">
+                        <Grid item xs={10}>
+                          <h4 className="card-title">{post.subject}</h4>
+                          <div className="card-date">
+                            Prazo de entrega: 20/10/2021
+                          </div>
+                        </Grid>
+                        <Grid item xs={2}>
+                          <Button
+                            className="button-report"
+                            onClick={() => handleSelect(post)}
+                          >
+                            <ReportIcon />
+                          </Button>
+                        </Grid>
+                      </Grid>
                     </div>
                     <img className="image" src={img1} alt="Foto do projeto" />
                     <CardHeader>
@@ -114,6 +176,24 @@ function ProjectList() {
             ))}
         </Row>
       </div>
+      <Dialog open={dialog} onClose={handleClose}>
+        <DialogTitle id="report-confirmation-title">
+          Confirmação de Denúncia
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="report-confirmation-description">
+            {`Você realmente deseja denunciar o projeto ${report.subject}?`}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button color="secondary" onClick={handleClose}>
+            Cancelar
+          </Button>
+          <Button color="danger" onClick={handleReport}>
+            Denunciar
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }

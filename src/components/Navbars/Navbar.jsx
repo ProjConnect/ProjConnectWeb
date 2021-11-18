@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Container, Col, Button } from 'reactstrap';
 import logo from '../../assets/images/logo_transparent1-01.png';
-import { logout } from '../../services/auth';
+import { logout, checkMod } from '../../services/auth';
 
 function Header() {
   const [color] = React.useState('transparent');
@@ -21,12 +21,12 @@ function Header() {
         </Col>
         <Col md="2">
           <div className="nav-link">
-            <Link to="/project/new">Adicionar projeto</Link>
+            <Link to="/project/list">Lista de projetos</Link>
           </div>
         </Col>
         <Col md="2">
           <div className="nav-link">
-            <Link to="/project/list">Lista de projetos</Link>
+            <Link to="/project/new">Adicionar projeto</Link>
           </div>
         </Col>
         <Col md="2">
@@ -39,6 +39,13 @@ function Header() {
             <Link to="/profile">Meu perfil</Link>
           </div>
         </Col>
+        {checkMod() ? (
+          <Col md="2">
+            <div className="nav-link">
+              <Link to="/mod">Moderador</Link>
+            </div>
+          </Col>
+        ) : null}
         <Col md="2">
           <div className="nav-link">
             <Button className="button-round" onClick={logout}>
