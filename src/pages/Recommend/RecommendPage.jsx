@@ -49,9 +49,6 @@ function RecommendPage({ match }) {
     const fetchData = () => {
       apiHandler
         .get('/my_profile')
-        .then((response) => {
-          setForm(response.data);
-        })
         .catch((error) => {
           // console.log(error);
           if (error.response.status === 401) {

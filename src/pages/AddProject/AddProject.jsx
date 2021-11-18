@@ -115,7 +115,7 @@ function AddProject() {
       const newPost = {
         subject,
         ownerId,
-        devId: [ownerId],
+        devId: [ownerId, ...supporters.split(/[,|]+/).map((str) => str.trim())],
         body,
         supporters: supporters.split(/[,|]+/).map((str) => str.trim()),
         isArchived: false,
