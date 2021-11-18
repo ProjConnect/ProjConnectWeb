@@ -18,12 +18,14 @@ import {
 } from 'react-vertical-timeline-component';
 import Data from '../data';
 import 'react-vertical-timeline-component/style.min.css';
-import avatar from '../assets/images/avatar.png';
+import Avatars from '../components/Avatars/Avatars';
 import NavBar from '../components/Navbars/Navbar';
 import apiHandler from '../services/api';
 import { logout } from '../services/auth';
 
 function User() {
+  const avatars = Avatars;
+
   const [isExpanded, setExpanded] = useState(false);
   const { getCollapseProps, getToggleProps } = useCollapse({
     isExpanded,
@@ -33,6 +35,7 @@ function User() {
   };
   const [form, setForm] = useState({
     username: '',
+    avatar: null,
     email: '',
     firstName: '',
     lastName: '',
@@ -75,7 +78,7 @@ function User() {
                 <div className="author">
                   <img
                     className="avatar"
-                    src={avatar}
+                    src={form.avatar !== null ? avatars[form.avatar] : null}
                     alt="Avatar do usuário"
                   />
                   <h5 className="title">{`${form.firstName} ${form.lastName}`}</h5>

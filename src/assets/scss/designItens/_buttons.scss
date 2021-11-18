@@ -30,6 +30,19 @@
   }
 }
 
+.button-round-centered {
+  border-width: 1px;
+  border-radius: 30px;
+  margin-top: 20px;
+  padding-right: 23px;
+  padding-left: 23px;
+  background-color: #ee4a68;
+  color: white;
+  &.button-simple {
+    padding: 11px -1px 22px -1px;
+  }
+}
+
 .button-apply {
   width: 130px;
   border-width: 1px;
