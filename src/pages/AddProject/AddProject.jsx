@@ -22,7 +22,6 @@ import Box from '@mui/material/Box';
 import NavBar from '../../components/Navbars/Navbar';
 import apiHandler from '../../services/api';
 import { logout } from '../../services/auth';
-import NavBar from '../../components/Navbars/Navbar';
 
 const tags = [
   'Figma',
