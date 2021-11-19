@@ -19,6 +19,7 @@ import {
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Box from '@mui/material/Box';
+import NavBar from '../../components/Navbars/Navbar';
 import apiHandler from '../../services/api';
 import { logout } from '../../services/auth';
 
@@ -114,7 +115,7 @@ function AddProject() {
       const newPost = {
         subject,
         ownerId,
-        devId: [ownerId],
+        devId: [ownerId, ...supporters.split(/[,|]+/).map((str) => str.trim())],
         body,
         supporters: supporters.split(/[,|]+/).map((str) => str.trim()),
         isArchived: false,
@@ -147,6 +148,7 @@ function AddProject() {
 
   return (
     <>
+      <NavBar />
       <div className="content">
         <Row>
           <Col md="12">

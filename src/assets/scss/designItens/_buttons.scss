@@ -1,75 +1,148 @@
 .button,
-.navbar .navbar-nav > a.button{
-    border-width: 2px;
-    font-weight: 600;
-    font-size: 0.6875rem;
-    line-height: 1.35em;
-    text-transform: uppercase;
-    border: none;
-    margin: 10px 1px;
-    border-radius: 3px;
-    padding: 11 22 px;
-    cursor: pointer;
+.navbar .navbar-nav > a.button {
+  border-width: 2px;
+  font-weight: 600;
+  font-size: 0.6875rem;
+  line-height: 1.35em;
+  text-transform: uppercase;
+  border: none;
+  margin: 10px 1px;
+  border-radius: 3px;
+  padding: 11 22 px;
+  cursor: pointer;
 
-    &:hover,
-    &:focus{
-        opacity: #EE4A68;
-        outline: 0 !important;
-    }
+  &:hover,
+  &:focus {
+    opacity: #ee4a68;
+    outline: 0 !important;
+  }
 }
 
 .button-round {
-    border-width: 1px;
-    border-radius: 30px;
-    padding-right: 23px;
-    padding-left: 23px;
-    background-color: #EE4A68;
-    color: white;
-    &.button-simple {
-        padding: 11px -1px  22px -1px;
-    }
+  border-width: 1px;
+  border-radius: 30px;
+  padding-right: 23px;
+  padding-left: 23px;
+  background-color: #ee4a68;
+  color: white;
+  &.button-simple {
+    padding: 11px -1px 22px -1px;
+  }
+}
+
+.button-round-centered {
+  border-width: 1px;
+  border-radius: 30px;
+  margin-top: 20px;
+  padding-right: 23px;
+  padding-left: 23px;
+  background-color: #ee4a68;
+  color: white;
+  &.button-simple {
+    padding: 11px -1px 22px -1px;
+  }
 }
 
 .button-apply {
-    width: 130px;
-    border-width: 1px;
-    margin-top: 5px;
-    margin-left: 15px;
-    border-radius: 30px;
-    padding-right: 5px;
-    padding-left: 5px;
-    background-color: #EE4A68;
-    color: white;
-    &.button-simple {
-        padding: 11px -1px  22px -1px;
-    }
+  width: 130px;
+  border-width: 1px;
+  margin-top: 5px;
+  margin-left: 15px;
+  border-radius: 30px;
+  padding-right: 5px;
+  padding-left: 5px;
+  background-color: #ee4a68;
+  color: white;
+  &.button-simple {
+    padding: 11px -1px 22px -1px;
+  }
 }
 
 .button-recommend {
-    width: 130px;
-    margin-top: 5px;
-    border-width: 1px;
-    margin-left: 22px;
-    border-radius: 30px;
-    padding-right: 5px;
-    padding-left: 5px;
-    background-color: #642597;
-    color: white;
-    &.button-simple {
-        padding: 11px -1px  22px -1px;
-    }
+  width: 130px;
+  margin-top: 5px;
+  border-width: 1px;
+  margin-left: 22px;
+  border-radius: 30px;
+  padding-right: 5px;
+  padding-left: 5px;
+  background-color: #642597;
+  color: white;
+  &.button-simple {
+    padding: 11px -1px 22px -1px;
+  }
 }
 
 .button-cancel {
-    width: 175px;
-    margin-left: 25px;
-    border-width: 1px;
-    border-radius: 30px;
-    padding-right: 5px;
-    padding-left: 5px;
-    background-color: #6b6b6b;
-    color: white;
-    &.button-simple {
-        padding: 11px -1px  22px -1px;
-    }
+  width: 175px;
+  margin-left: 25px;
+  border-width: 1px;
+  border-radius: 30px;
+  padding-right: 5px;
+  padding-left: 5px;
+  background-color: #6b6b6b;
+  color: white;
+  &.button-simple {
+    padding: 11px -1px 22px -1px;
+  }
+}
+
+.button-report {
+  border-width: 1px;
+  margin-top: 5px;
+  margin-left: 15px;
+  padding-right: 5px;
+  padding-left: 5px;
+  background-color: #ee4a68;
+  color: white;
+  &.button-simple {
+    padding: 11px -1px 22px -1px;
+  }
+}
+
+.button-add-mod {
+  width: 200px;
+  border-width: 1px;
+  margin-top: 5px;
+  border-radius: 30px;
+  background-color: #4a68ee;
+  color: white;
+  &.button-simple {
+    padding: 11px -1px 22px -1px;
+  }
+}
+
+.button-mod-ok {
+  width: 80%;
+  border-width: 1px;
+  margin-top: 5px;
+  margin-left: 15px;
+  border-radius: 30px;
+  padding-right: 5px;
+  padding-left: 5px;
+  background-color: #186924;
+  color: white;
+  &.button-simple {
+    padding: 11px -1px 22px -1px;
+  }
+}
+
+.button-mod-delete {
+  width: 80%;
+  border-width: 1px;
+  margin-top: 5px;
+  margin-left: 15px;
+  border-radius: 30px;
+  padding-right: 5px;
+  padding-left: 5px;
+  background-color: #ec3053;
+  color: white;
+  &.button-simple {
+    padding: 11px -1px 22px -1px;
+  }
+}
+
+.add-color {
+  background-color: #4a68ee;
+  color: white;
 }
