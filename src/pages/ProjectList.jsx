@@ -147,7 +147,7 @@ function ProjectList() {
                     <CardHeader>
                       <CardTitle tag="h5">Descrição</CardTitle>
                     </CardHeader>
-                    <p className="description">{post.body}</p>
+                    <p className="description">{`${post.body.substring(0, 75)}...`}</p>
                     <CardHeader>
                       <CardTitle tag="h5">Linguagens e tecnologias</CardTitle>
                     </CardHeader>
