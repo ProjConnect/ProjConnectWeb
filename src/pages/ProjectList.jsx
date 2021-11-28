@@ -89,7 +89,8 @@ function ProjectList() {
   }, []);
 
   function handleInterestRequest(postId) {
-    apiHandler.get('/my_profile')
+    apiHandler
+      .get('/my_profile')
       .then((response) => {
         const devId = response.data.username;
         const post = postId;
@@ -100,7 +101,7 @@ function ProjectList() {
         });
       })
       .catch((error) => {
-      // console.log(error);
+        // console.log(error);
         if (error.response.status === 401) {
           logout();
         }
@@ -120,7 +121,14 @@ function ProjectList() {
                     <div className="card-title-group">
                       <Grid container alignItems="center">
                         <Grid item xs={10}>
-                          <h4 className="card-title">{post.subject}</h4>
+                          <h4 className="card-title">
+                            <Link
+                              // eslint-disable-next-line dot-notation
+                              to={`/post/${post['_id']}`}
+                            >
+                              {post.subject}
+                            </Link>
+                          </h4>
                           <div className="card-date">
                             Prazo de entrega: 20/10/2021
                           </div>
