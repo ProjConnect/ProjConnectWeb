@@ -9,7 +9,6 @@ import {
   CardBody,
   CardTitle,
   FormGroup,
-  FormText,
   Form,
   Input,
   Row,
@@ -285,18 +284,6 @@ function AddProject() {
                             setSupporters(event.target.value);
                           }}
                         />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md="12">
-                      <FormGroup>
-                        <label>Imagem ou Vídeo</label>
-                        <Input type="file" name="file" id="exampleFile" />
-                        <FormText color="muted">
-                          Selecione uma imagem ou vídeo que represente o
-                          projeto.
-                        </FormText>
                       </FormGroup>
                     </Col>
                   </Row>

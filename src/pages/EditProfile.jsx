@@ -1,4 +1,5 @@
-/* eslint-disable jsx-a11y/label-has-associated-control, object-curly-newline */
+/* eslint-disable jsx-a11y/label-has-associated-control, object-curly-newline, import/no-unresolved
+*/
 import React, { useEffect, useState } from 'react';
 import {
   Button,

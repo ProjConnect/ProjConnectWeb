@@ -1,4 +1,4 @@
-/* eslint-disable no-alert, operator-linebreak */
+/* eslint-disable no-alert, operator-linebreak, import/no-unresolved */
 import React, { useEffect, useState } from 'react';
 import { Card, CardBody, Row, Col, Button } from 'reactstrap';
 
