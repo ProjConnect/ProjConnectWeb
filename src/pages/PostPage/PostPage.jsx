@@ -167,7 +167,10 @@ function PostPage() {
                       <h4 className="card-title">Integrantes</h4>
                       {ideaPost.devId.length > 0 &&
                         ideaPost.devId.map((dev) => (
-                          <Link to={`/profile/user/${dev}`}>{dev},</Link>
+                          <Link to={`/profile/user/${dev}`}>
+                            {dev}
+                            ,
+                          </Link>
                         ))}
                     </Col>
                   </Row>
