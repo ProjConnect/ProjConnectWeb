@@ -35,17 +35,23 @@ function ImageSelect(props) {
               <Grid
                 item
                 xs={4}
-                onClick={() => setForm({ ...form, [value]: index })}
+                onClick={() => {
+                  setForm({ ...form, [value]: index });
+                }}
               >
-                <img
-                  src={image}
-                  alt=""
-                  style={{
-                    height: '124px',
-                    width: '124px',
-                    background: form[value] === index ? 'black' : 'white',
-                  }}
-                />
+                <Grid
+                  padding="10px"
+                  backgroundColor={form[value] === index ? 'black' : 'white'}
+                >
+                  <img
+                    src={image}
+                    alt=""
+                    style={{
+                      height: '124px',
+                      width: '124px',
+                    }}
+                  />
+                </Grid>
               </Grid>
             );
           })}
