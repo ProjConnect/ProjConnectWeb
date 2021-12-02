@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/jsx-wrap-multilines */
 /* eslint-disable  operator-linebreak */
+/* eslint-disable object-curly-newline */
 import React, { useState, useEffect } from 'react';
 import '../LandingPage/LandingPage.css';
 import {
@@ -9,7 +10,6 @@ import {
   CardBody,
   CardTitle,
   FormGroup,
-  FormText,
   Form,
   Input,
   Row,
@@ -20,6 +20,8 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Box from '@mui/material/Box';
 import NavBar from '../../components/Navbars/Navbar';
+import ImageSelect from '../../components/ImageSelect/ImageSelect';
+import ProjectImages from '../../components/ProjectImages/ProjectImages';
 import apiHandler from '../../services/api';
 import { logout } from '../../services/auth';
 
@@ -66,6 +68,7 @@ const tags = [
 ];
 
 function AddProject() {
+  const imageSet = ProjectImages;
   const [checkedBoxes, setCheckedBoxes] = useState(
     new Array(tags.length).fill(false),
   );
@@ -78,6 +81,8 @@ function AddProject() {
   const [course, setCourse] = useState('');
   const [missingFields, setMissingFields] = useState(false);
   const [deadline, setDeadline] = useState(null);
+  const [dialog, setDialog] = useState(false);
+  const [image, setImage] = useState({ index: 0 });
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -123,6 +128,7 @@ function AddProject() {
         isArchived: false,
         tags: [...t, ...r],
         course,
+        image: image.index,
       };
       apiHandler
         .post('/new-post', newPost)
@@ -302,14 +308,12 @@ function AddProject() {
                   </Row>
                   <Row>
                     <Col md="12">
-                      <FormGroup>
-                        <label>Imagem ou Vídeo</label>
-                        <Input type="file" name="file" id="exampleFile" />
-                        <FormText color="muted">
-                          Selecione uma imagem ou vídeo que represente o
-                          projeto.
-                        </FormText>
-                      </FormGroup>
+                      <Button
+                        className="button-round"
+                        onClick={() => setDialog(true)}
+                      >
+                        Escolher imagem de projeto
+                      </Button>
                     </Col>
                   </Row>
                   <Row>
@@ -354,6 +358,15 @@ function AddProject() {
           </Col>
         </Row>
       </div>
+      <ImageSelect
+        dialog={dialog}
+        setDialog={setDialog}
+        form={image}
+        setForm={setImage}
+        value="index"
+        imageSet={imageSet}
+        description="Selecione a imagem desejada"
+      />
     </>
   );
 }
