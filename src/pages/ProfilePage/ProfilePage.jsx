@@ -1,31 +1,32 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import {
   Button,
   Card,
   CardHeader,
   CardBody,
-  CardFooter,
   CardTitle,
   Row,
   Col,
 } from 'reactstrap';
 import useCollapse from 'react-collapsed';
-import '../assets/scss/historic.scss';
+import '../../assets/scss/historic.scss';
+import 'react-vertical-timeline-component/style.min.css';
 import {
   VerticalTimeline,
   VerticalTimelineElement,
 } from 'react-vertical-timeline-component';
-import ProjectImages from '../components/ProjectImages/ProjectImages';
-import 'react-vertical-timeline-component/style.min.css';
-import Avatars from '../components/Avatars/Avatars';
-import NavBar from '../components/Navbars/Navbar';
-import apiHandler from '../services/api';
-import { logout } from '../services/auth';
+import Avatars from '../../components/Avatars/Avatars';
+import NavBar from '../../components/Navbars/Navbar';
+import ProjectImages from '../../components/ProjectImages/ProjectImages';
+import apiHandler from '../../services/api';
+import { logout } from '../../services/auth';
 
-function User() {
+function ProfilePage({ match }) {
+  const { username } = match.params;
   const avatars = Avatars;
   const projectImgs = ProjectImages;
+  const [projects, setProjects] = useState([]);
 
   const [isExpanded, setExpanded] = useState(false);
   const { getCollapseProps, getToggleProps } = useCollapse({
@@ -48,29 +49,26 @@ function User() {
     otherSkills: '',
   });
 
-  const [projects, setProjects] = useState([]);
-
   useEffect(() => {
     const fetchData = () => {
       apiHandler
-        .get('/my_profile')
+        .get(`/search/user/username/${username}`)
         .then((response) => {
           setForm(response.data);
         })
         .catch((error) => {
           // console.log(error);
-          if (error.response.status === 401) {
+          if (error.response && error.response.status === 401) {
             logout();
           }
         });
-      apiHandler
-        .get('/posts/mine')
+      apiHandler.get(`/search/post/user/${username}`)
         .then((response) => {
           setProjects(response.data);
         })
         .catch((error) => {
           // console.log(error);
-          if (error.response.status === 401) {
+          if (error.response && error.response.status === 401) {
             logout();
           }
         });
@@ -98,7 +96,7 @@ function User() {
                   <h5 className="title">{`${form.firstName} ${form.lastName}`}</h5>
                   <p className="description">{`@${form.username}`}</p>
                 </div>
-                <p className="topic">Sobre mim</p>
+                <p className="topic">Sobre</p>
                 <p className="description">{form.aboutMe}</p>
                 <p className="topic">Github</p>
                 <p className="description">
@@ -119,22 +117,6 @@ function User() {
                 <p className="topic">Conhecimentos gerais</p>
                 <p className="description">{form.otherSkills}</p>
               </CardBody>
-              <CardFooter>
-                <hr />
-                <div className="button-container">
-                  <Row>
-                    <Col className="ml-auto">
-                      <div className="update ml-auto mr-auto">
-                        <Link to="/profile/edit">
-                          <Button className="button-round">
-                            Editar perfil
-                          </Button>
-                        </Link>
-                      </div>
-                    </Col>
-                  </Row>
-                </div>
-              </CardFooter>
             </Card>
           </Col>
         </Row>
@@ -193,4 +175,4 @@ function User() {
   );
 }
 
-export default User;
+export default ProfilePage;

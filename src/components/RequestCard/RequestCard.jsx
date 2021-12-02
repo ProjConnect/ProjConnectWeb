@@ -10,22 +10,25 @@ import {
   Row,
 } from 'reactstrap';
 // import '../../assets/scss/historic.scss';
+import { Link } from 'react-router-dom';
 import apiHandler from '../../services/api';
 
 function RequestCard({ title, devs, callback }) {
   function accept(req) {
-    apiHandler.post('/request/response', {
+    const res = {
       requestId: req,
       accepted: true,
-    });
+    };
+    apiHandler.post('/request/response', res);
     callback(req);
   }
 
   function refuse(req) {
-    apiHandler.post('/request/response', {
+    const res = {
       requestId: req,
       accepted: false,
-    });
+    };
+    apiHandler.post('/request/response', res);
     callback(req);
   }
 
@@ -39,7 +42,9 @@ function RequestCard({ title, devs, callback }) {
           {devs.map((dev) => (
             <Col className="ml-auto">
               <p className="topic">Username</p>
-              <p>{dev.devId}</p>
+              <Link to={`/profile/${dev.devId}`}>
+                <p>{dev.devId}</p>
+              </Link>
               {dev.description.length > 0 && (
                 <>
                   <p className="topic">Descrição</p>

@@ -1,4 +1,5 @@
-/* eslint-disable jsx-a11y/label-has-associated-control, object-curly-newline */
+/* eslint-disable jsx-a11y/label-has-associated-control, object-curly-newline, import/no-unresolved
+*/
 import React, { useEffect, useState } from 'react';
 import {
   Button,
@@ -12,16 +13,10 @@ import {
   Row,
   Col,
 } from 'reactstrap';
-import {
-  Grid,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  Typography,
-} from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import Avatars from '../components/Avatars/Avatars';
 import NavBar from '../components/Navbars/Navbar';
+import ImageSelect from '../components/ImageSelect/ImageSelect';
 import apiHandler from '../services/api';
 import { logout } from '../services/auth';
 
@@ -81,6 +76,28 @@ function EditProfile() {
     };
     fetchData();
   }, []);
+
+  const [langs, setLangs] = useState([]);
+  const [techs, setTechs] = useState([]);
+  const [skills, setSkills] = useState([]);
+
+  const addTags = (event, id, tags, setter) => {
+    if (event.key === 'Enter' && event.target.value !== '') {
+      setter([...tags, event.target.value]);
+      setForm({
+        ...form,
+        [id]: tags,
+      });
+    }
+  };
+
+  const removeTags = (tag, id, tags, setter) => {
+    setter([...tags.filter((t) => t !== tag)]);
+    setForm({
+      ...form,
+      [id]: tags,
+    });
+  };
 
   return (
     <>
@@ -195,37 +212,90 @@ function EditProfile() {
                     <Col md="4">
                       <FormGroup>
                         <label>Conhecimento em linguagens</label>
-                        <Input
-                          id="languages"
-                          value={form.languages}
-                          onChange={(e) => handleChange(e)}
-                          type="textarea"
-                          disabled
-                        />
+                        <div className="tags-input">
+                          <ul>
+                            {langs.map((tag) => (
+                              <li>
+                                <span>{tag}</span>
+                                <Button
+                                  onClick={() => removeTags(
+                                    tag,
+                                    'languages',
+                                    langs,
+                                    setLangs,
+                                  )}
+                                >
+                                  <CloseIcon />
+                                </Button>
+                              </li>
+                            ))}
+                          </ul>
+                          <input
+                            type="text"
+                            onKeyUp={(event) => addTags(
+                              event, 'languages', langs, setLangs,
+                            )}
+                            placeholder="Pressione a tecla Enter para adicionar tag"
+                          />
+                        </div>
                       </FormGroup>
                     </Col>
                     <Col md="4">
                       <FormGroup>
                         <label>Conhecimento em tecnologias</label>
-                        <Input
-                          id="technologies"
-                          value={form.technologies}
-                          onChange={(e) => handleChange(e)}
-                          type="textarea"
-                          disabled
-                        />
+                        <div className="tags-input">
+                          <ul>
+                            {techs.map((tag) => (
+                              <li>
+                                <span>{tag}</span>
+                                <Button
+                                  onClick={() => removeTags(
+                                    tag,
+                                    'technologies',
+                                    techs,
+                                    setTechs,
+                                  )}
+                                >
+                                  <CloseIcon />
+                                </Button>
+                              </li>
+                            ))}
+                          </ul>
+                          <input
+                            type="text"
+                            onKeyUp={(event) => addTags(event, 'technologies', techs, setTechs)}
+                            placeholder="Pressione a tecla Enter para adicionar tag"
+                          />
+                        </div>
                       </FormGroup>
                     </Col>
                     <Col md="4">
                       <FormGroup>
                         <label>Conhecimentos gerais</label>
-                        <Input
-                          id="otherSkills"
-                          value={form.otherSkills}
-                          onChange={(e) => handleChange(e)}
-                          type="textarea"
-                          disabled
-                        />
+                        <div className="tags-input">
+                          <ul>
+                            {skills.map((tag) => (
+                              <li>
+                                <span>{tag}</span>
+                                <Button
+                                  onClick={() => removeTags(
+                                    tag,
+                                    'otherSkills',
+                                    skills,
+                                    setSkills,
+                                  )}
+                                >
+                                  <CloseIcon />
+                                </Button>
+                              </li>
+                            ))}
+                          </ul>
+                          <input
+                            type="text"
+                            onKeyUp={(event) => addTags(event, 'otherSkills', skills, setSkills)}
+                            placeholder="Pressione a tecla Enter para adicionar tag"
+                          />
+                        </div>
                       </FormGroup>
                     </Col>
                   </Row>
@@ -244,44 +314,15 @@ function EditProfile() {
           </Col>
         </Row>
       </div>
-      <Dialog open={dialog} onClose={() => setDialog(false)}>
-        <DialogTitle>
-          <Grid container>
-            <Grid xs={11}>
-              <Typography variant="h3">Selecione o avatar desejado</Typography>
-            </Grid>
-            <Grid item xs={1}>
-              <Button onClick={() => setDialog(false)}>
-                <CloseIcon />
-              </Button>
-            </Grid>
-          </Grid>
-        </DialogTitle>
-        <DialogContent>
-          <Grid container xs={12} spacing={2}>
-            {/* eslint-disable-next-line arrow-body-style */}
-            {avatars.map((image, index) => {
-              return (
-                <Grid
-                  item
-                  xs={4}
-                  onClick={() => setForm({ ...form, avatar: index })}
-                >
-                  <img
-                    src={image}
-                    alt="Avatar do usuário"
-                    style={{
-                      height: '124px',
-                      width: '124px',
-                      background: form.avatar === index ? 'black' : 'white',
-                    }}
-                  />
-                </Grid>
-              );
-            })}
-          </Grid>
-        </DialogContent>
-      </Dialog>
+      <ImageSelect
+        dialog={dialog}
+        setDialog={setDialog}
+        form={form}
+        setForm={setForm}
+        value="avatar"
+        imageSet={avatars}
+        description="Selecione o avatar desejado"
+      />
     </>
   );
 }
