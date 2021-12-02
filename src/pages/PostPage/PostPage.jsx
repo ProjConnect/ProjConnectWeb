@@ -91,6 +91,10 @@ function PostPage() {
           post,
           devId,
           description: '',
+        }).then(() => {
+          alert('Solicitação feita com sucesso');
+        }).catch(() => {
+          alert('Erro na solicitação');
         });
       })
       .catch((error) => {
@@ -147,8 +151,8 @@ function PostPage() {
                   <Row>
                     <Col md="12">
                       <h4 className="card-title">Integrantes</h4>
-                      {ideaPost.supporters.length > 0 &&
-                        ideaPost.supporters.map((dev) => (
+                      {ideaPost.devId.length > 0 &&
+                        ideaPost.devId.map((dev) => (
                           <Link to={`/profile/${dev}`}>
                             {dev}
                             ,

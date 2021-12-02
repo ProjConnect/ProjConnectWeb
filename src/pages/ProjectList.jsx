@@ -98,6 +98,10 @@ function ProjectList() {
           post,
           devId,
           description: '',
+        }).then(() => {
+          alert('Solicitação feita com sucesso');
+        }).catch(() => {
+          alert('Erro na solicitação');
         });
       })
       .catch((error) => {

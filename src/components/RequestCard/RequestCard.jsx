@@ -10,6 +10,7 @@ import {
   Row,
 } from 'reactstrap';
 // import '../../assets/scss/historic.scss';
+import { Link } from 'react-router-dom';
 import apiHandler from '../../services/api';
 
 function RequestCard({ title, devs, callback }) {
@@ -39,7 +40,9 @@ function RequestCard({ title, devs, callback }) {
           {devs.map((dev) => (
             <Col className="ml-auto">
               <p className="topic">Username</p>
-              <p>{dev.devId}</p>
+              <Link to={`/profile/${dev.devId}`}>
+                <p>{dev.devId}</p>
+              </Link>
               {dev.description.length > 0 && (
                 <>
                   <p className="topic">Descrição</p>

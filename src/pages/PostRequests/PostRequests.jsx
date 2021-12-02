@@ -25,11 +25,19 @@ function PostRequestsPage() {
         .get('/posts/mine')
         .then((response) => {
           const postsData = response.data;
-          const data = postsData.map(async (post) => {
+          const data = postsData.map((post) => {
             // eslint-disable-next-line dot-notation
-            const req = await apiHandler.get(
+            let req = [];
+            apiHandler.get(
               `/search/request/postid/${post['_id']}`,
-            );
+            ).then((res) => {
+              req = res.data;
+            }).catch((e) => {
+              if (e.response && e.response.status === 401) {
+                logout();
+              }
+              req = [];
+            });
             return {
               ...post,
               requests: req,
