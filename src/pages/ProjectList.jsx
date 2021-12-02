@@ -95,10 +95,15 @@ function ProjectList() {
       .then((response) => {
         const devId = response.data.username;
         const post = postId;
-        apiHandler.post('/request/create', {
+        const newRequest = {
           post,
           devId,
           description: '',
+        };
+        apiHandler.post('/request/create', newRequest).then(() => {
+          alert('Solicitação feita com sucesso');
+        }).catch(() => {
+          alert('Erro na solicitação');
         });
       })
       .catch((error) => {

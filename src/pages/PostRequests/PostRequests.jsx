@@ -22,20 +22,9 @@ function PostRequestsPage() {
   useEffect(() => {
     const fetchData = () => {
       apiHandler
-        .get('/posts/mine')
+        .get('/request/received')
         .then((response) => {
-          const postsData = response.data;
-          const data = postsData.map(async (post) => {
-            // eslint-disable-next-line dot-notation
-            const req = await apiHandler.get(
-              `/search/request/postid/${post['_id']}`,
-            );
-            return {
-              ...post,
-              requests: req,
-            };
-          });
-          setPosts(data.filter((post) => post.requests.length > 0));
+          setPosts(response.data);
         })
         .catch((error) => {
           // console.log(error);

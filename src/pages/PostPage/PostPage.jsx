@@ -1,4 +1,4 @@
-/* eslint-disable no-alert, operator-linebreak */
+/* eslint-disable no-alert, operator-linebreak, import/no-unresolved */
 import React, { useEffect, useState } from 'react';
 import { Card, CardBody, Row, Col, Button } from 'reactstrap';
 
@@ -88,10 +88,15 @@ function PostPage() {
       .then((response) => {
         const devId = response.data.username;
         const post = postIdd;
-        apiHandler.post('/request/create', {
+        const newRequest = {
           post,
           devId,
           description: '',
+        };
+        apiHandler.post('/request/create', newRequest).then(() => {
+          alert('Solicitação feita com sucesso');
+        }).catch(() => {
+          alert('Erro na solicitação');
         });
       })
       .catch((error) => {
@@ -149,7 +154,7 @@ function PostPage() {
                     <Col md="12">
                       <h4 className="card-title">Integrantes</h4>
                       {ideaPost.devId.length > 0 &&
-                        ideaPost.supporters.map((dev) => (
+                        ideaPost.devId.map((dev) => (
                           <Link to={`/profile/${dev}`}>
                             {dev}
                             ,

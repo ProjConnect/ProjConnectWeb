@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable react/prop-types */
+/* eslint-disable react/prop-types, dot-notation, no-alert */
 import React, { useEffect, useState } from 'react';
 import {
   Button,
@@ -33,15 +33,27 @@ function RecommendPage({ match }) {
     });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     if (form.username.length === 0) {
       return;
     }
-    const post = await apiHandler.get(`search/post/name/${form.name}`);
-    apiHandler.post('request/create', {
-      post: post.postId,
-      devId: form.username,
-      description: form.aboutDev,
+    apiHandler.get(`/search/post/name/${match.params.name}`).then((res) => {
+      const post = res.data;
+      const newRequest = {
+        post: post['_id'],
+        devId: form.username,
+        description: form.aboutDev,
+      };
+      apiHandler.post('/request/create', newRequest).then(() => {
+        alert('Solicitação feita com sucesso');
+      }).catch(() => {
+        alert('Erro na solicitação');
+      });
+    }).catch((error) => {
+      // console.log(error);
+      if (error.response.status === 401) {
+        logout();
+      }
     });
   };
 
