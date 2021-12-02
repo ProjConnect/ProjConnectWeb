@@ -29,6 +29,90 @@ Este repositório corresponde ao front-end web da plataforma.
 
 #### Telas.
 
+As telas a seguir foram implementadas e já estão funcionando em conjunto com o back end:
+
+* Página inicial do projeto
+
+Contém o botão para realizar o login na plataforma e também apresenta uma descrição curta da plataforma.
+
+![pagina-inicial](assets/pagina-inicial.png)
+
+* Página de login
+
+Atualmente disponibilizamos apenas o login com o Google, a API da Google permite apenas usuários da 
+Unicamp realizarem o login
+
+![pagina-login](assets/pagina-login.png)
+
+* Lista de Projetos
+
+Lista com todos os projetos da plataforma, ele não filtra por posts ainda abertos ou não, então é sugerível que no futuro se implemente
+o filtro de posts ainda em aberto e remover posts que não estão mais ativos.
+
+O botão vermelho no canto superior direito de cada post serve para denunciar o projeto para os moderadores, para evitar o acionamento 
+acidental, tem uma janela para confirmar que você quer denunciar o projeto.
+
+Se você clicar no título do projeto, você é redirecionado para a página do projeto com maiores descrições sobre ele.
+
+Os dois botões inferiores servem para pedir para o dono para você participar do projeto e para recomendar um colega para este projeto.
+
+
+![lista-projetos](assets/lista-projetos.png)
+
+
+* Página de Projetos
+
+Página com maior mais informações sobre o projeto, como os participantes do projeto (dono da ideia e os desenvolvedores).
+
+![pagina-projeto](assets/pagina-projeto.png)
+
+* Recomendar dev
+
+Se você conhece uma pessoa que você acha legal que ela participe de um projeto por, por exemplo, afinidade com o assunto ou 
+sobre suas skills, você consegue recomendar essa pessoa para o dono do projeto e escrever o porquê de sua escolha. 
+
+![recomendar-dev](assets/recomendar-dev.png)
+
+* Página com pedidos de entrada para seu(s) projeto(s)
+
+Essa página serve para que o dono do projeto (aquele que escreveu a ideia) consiga ver se há pessoas interessadas em participar
+de seus projetos, ver o perfil clicando no username e aceitar ou recusar o candidato.
+
+![requisicoes-para-responder](assets/requisicoes-para-responder.png)
+
+* Meu perfil de usuário
+
+Essa página apresenta suas informações pessoais como seu nome, e-mail, links de github e de gitlab e avatar. Embaixo apresenta
+uma linha do tempo com seu histórico de projetos, projetos que você escreveu a ideia e aqueles que você participou como 
+desenvolvedor.
+
+![meu-perfil](assets/meu-perfil.png)
+
+Aqui embaixo destacamos a linha do tempo dos projetos, que também está dentro da mesma página
+
+![historico](assets/historico.png)
+
+* Editar meu perfil
+
+Editar seus dados pessoais dentro da plataforma e conseguir compartilhar suas ideias, skills e formas de contatos
+
+![editar-perfil](assets/editar-perfil.png)
+
+* Tratar denúncias
+
+Aqui está a página que moderadores têm acesso para ver as denúncias de posts e poder remover o post da página de lista de projetos - 
+o projeto não é simplesmente deletado, ele é arquivado para futuras punições do autor do post.
+
+![denuncias](assets/denuncias.png)
+
+
+Na mesma página, selecionando usuários, conseguimos ver usuários que tiveram seus posts removidos pelos administradores da plataforma,
+ver a quantidade de infrações e também conseguir banir esses usuários.
+
+![denuncias2](assets/denuncias2.png)
+
+
+
 #### Tecnologias e dependências.
 
 O projeto do front-end foi desenvolvido utilizando React.
