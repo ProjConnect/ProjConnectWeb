@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable react/prop-types, no-alert */
+/* eslint-disable react/prop-types, dot-notation, no-alert */
 import React, { useEffect, useState } from 'react';
 import {
   Button,
@@ -39,11 +39,12 @@ function RecommendPage({ match }) {
     }
     apiHandler.get(`/search/post/name/${match.params.name}`).then((res) => {
       const post = res.data;
-      apiHandler.post('/request/create', {
-        post: post.postId,
+      const newRequest = {
+        post: post['_id'],
         devId: form.username,
         description: form.aboutDev,
-      }).then(() => {
+      };
+      apiHandler.post('/request/create', newRequest).then(() => {
         alert('Solicitação feita com sucesso');
       }).catch(() => {
         alert('Erro na solicitação');

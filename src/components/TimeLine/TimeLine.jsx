@@ -22,23 +22,6 @@ function TimeLine({ posts }) {
   const IconStyles = {
     background: '#06D6A0',
   };
-    //   const [projectListHistory, setProjectListHist] = useState(null);
-    //   useEffect(() => {
-    //     const fetchData = () => {
-    //       apiHandler
-    //         .get('/posts/mine')
-    //         .then((response) => {
-    //           setProjectListHist(response.data);
-    //         })
-    //         .catch((error) => {
-    //           // console.log(error);
-    //           if (error.response.status === 401) {
-    //             logout();
-    //           }
-    //         });
-    //     };
-    //     fetchData();
-    //   }, []);
 
   const images = [img1, img2, img3, img4, img5];
 
