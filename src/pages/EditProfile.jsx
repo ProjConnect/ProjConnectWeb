@@ -87,7 +87,6 @@ function EditProfile() {
         ...form,
         [id]: tags,
       });
-      // event.target.value = '';
     }
   };
 
