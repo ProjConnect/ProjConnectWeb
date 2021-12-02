@@ -77,6 +77,7 @@ function AddProject() {
   const [observation, setObservations] = useState('');
   const [course, setCourse] = useState('');
   const [missingFields, setMissingFields] = useState(false);
+  const [deadline, setDeadline] = useState(null);
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -115,6 +116,7 @@ function AddProject() {
       const newPost = {
         subject,
         ownerId,
+        deadline,
         devId: [ownerId, ...supporters.split(/[,|]+/).map((str) => str.trim())],
         body,
         supporters: supporters.split(/[,|]+/).map((str) => str.trim()),
@@ -171,7 +173,7 @@ function AddProject() {
                         />
                       </FormGroup>
                     </Col>
-                    <Col className="pl-1" md="6">
+                    <Col className="pl-1" md="3">
                       <FormGroup>
                         <label>Sigla da disciplina</label>
                         <Input
@@ -179,6 +181,16 @@ function AddProject() {
                           type="text"
                           value={course}
                           onChange={(event) => setCourse(event.target.value)}
+                        />
+                      </FormGroup>
+                    </Col>
+                    <Col className="pl-1" md="3">
+                      <FormGroup>
+                        <label>Prazo</label>
+                        <Input
+                          type="date"
+                          value={deadline}
+                          onChange={(event) => setDeadline(event.target.value)}
                         />
                       </FormGroup>
                     </Col>
