@@ -1,70 +1,106 @@
-# Getting Started with Create React App
+# Universidade Estadual de Campinas
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Instituto da Computação
 
-## Available Scripts
+## Disciplina: MC855-2s2021
 
-In the project directory, you can run:
+#### Professor e Assistente
 
-### `yarn start`
+| Nome                     | Email                   |
+| ------------------------ | ----------------------- |
+| Professora Juliana Borin | jufborin@unicamp.br     |
+| Assistente Paulo Kussler | paulo.kussler@gmail.com |
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### Equipe
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+| Nome                         | RA     | Email                  | ID Git         |
+| ---------------------------- | ------ | ---------------------- | -------------- |
+| Frederico Meletti Rappa      | 216047 | f216047@dac.unicamp.br | frerappa       |
+| João Alberto Moreira Seródio | 218548 | j218548@dac.unicamp.br | SerodioJ       |
+| Roberta Rozendo Veronez      | 186671 | r186671@dac.unicamp.br | robertaveronez |
+| Willian Takayuki Ozako       | 207267 | w207267@dac.unicamp.br | Oozaku         |
 
-### `yarn test`
+### Descrição do projeto:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+O ProjConnect é uma plataforma que permite que pessoas dentro da comunidade da UNICAMP consigam compartilhar ideias de projetos em computação
+e que as conecte com pessoas que tenham conhecimento de como desenvolvê-los, criando demanda também para as matérias de projetos.
 
-### `yarn build`
+Este repositório corresponde ao front-end web da plataforma.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Telas.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Tecnologias e dependências.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+O projeto do front-end foi desenvolvido utilizando React.
 
-### `yarn eject`
+### Ambientes
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Configuração do Ambiente (Ubuntu 20.04 foi utilizado)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Instale os pacotes `g++`, `make` e `python` pelo gerenciador de pacotes.
+- Configure o `nvm` para melhor gerenciamento das versões de node na máquina e instale a versão 15 do nodejs
+  ```
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+  nvm install 15
+  ```
+- Com a versão 15 do nodejs selecionada, instale o yarn
+  ```
+  nvm use 15
+  npm install --global yarn
+  ```
+- Na raiz do repositório utilize o yarn para instalar as dependências, a flag `--production` pode ser utilizada para instalar apenas as dependências de produção
+  ```
+  yarn install
+  ```
+- Com as dependências instaladas, agora é possível executar o server de desenvolvimento com `yarn start` ou criar o conteúdo estático com `yarn build`.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### Utilização do pre-commit com ferramentas de lint
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+O pre-commit está configurado neste repositório, e tem como função verificar questões relacionadas a lint e formatação de arquivos antes de criar um commit.
 
-## Learn More
+A fim de configurá-lo na máquina pessoal basta utilizar o `pip` para instalar os pacotes presentes em `requirements_dev.txt`, isso pode ser feito com
+`pip install -r requirements_dev.txt` e então basta executar `pre-commit install` no diretório do repositório. No próximo commit os passos do pre-commit serão executados.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Execução do projeto
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Desenvolvimento
 
-### Code Splitting
+A fim de executar o projeto do front-end na máquina de desenvolvimento, basta utilizar o script próprio do React, que dará início a um server na porta 3000.
+Esse script pode ser executado com
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+yarn start
+```
 
-### Analyzing the Bundle Size
+Uma configuração que facilita a execução do front (este repositório) com o back-end é a utilização no NGINX na máquina de maneira que a `/` seja redirecionado para
+a porta 3000 e `/api` para a porta da api (usualmente 8080). Com isso, o projeto é acessado na porta 80 (http://localhost).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+#### Produção
 
-### Making a Progressive Web App
+O NGINX é utilizado como webserver para servir conteúdo estático e proxy para API, e a geração de certificado HTTPS é realizado com o [Certbot](https://certbot.eff.org/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Um exemplo de arquivo de configuração do NGINX que deve ser adicionado no diretório `sites-available` está presente [aqui](ngnix). O conteúdo estático é gerado executando
 
-### Advanced Configuration
+```
+yarn build
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Com isso, a pasta build criada, pode ser copiada para `/var/www/<STATIC_CONTENT>` ou um symbolic link pode ser criado
 
-### Deployment
+```
+sudo ln -s <PATH_TO_BUILD_DIR> /var/www/<STATIC_CONTENT>
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+#### Fabric
 
-### `yarn build` fails to minify
+Esse repositório contém um fabfile que é utilizado nos workflows de deploy. Assim, utilizando Fabric o pipeline de deploy realiza SSH na máquina e realiza os seguintes passos:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- atualização da branch
+- instalação de pacotes
+- build de arquivos estáticos
+
+#### Como acessar, quem pode se cadastrar(regras de acessos), etc.
+
+Qualquer pessoa com um email do domínio da UNICAMP (_@unicamp.br, _@dac.unidamp.br) consegue realizar o login utilzando o login integrado com Google.
+
+#### Repositório da Professora Juliana no Gitlab do IC ou Zip com o projeto e todos artefatos para futuras evoluções dos projetos por outros alunos das turmas seguintes
