@@ -1,4 +1,4 @@
-/* eslint-disable no-alert */
+/* eslint-disable no-alert, object-curly-newline */
 import React, { useState, useEffect } from 'react';
 import { Card, Form, FormGroup, Input, Row, Col, Button } from 'reactstrap';
 import {
@@ -12,6 +12,10 @@ import {
   DialogTitle,
   DialogActions,
   DialogContent,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from '@material-ui/core';
 import { Redirect } from 'react-router-dom';
 import apiHandler from '../../services/api';
@@ -20,6 +24,8 @@ import NavBar from '../../components/Navbars/Navbar';
 
 function ModeratorPage() {
   const [reported, setReported] = useState([]);
+  const [infractors, setInfractors] = useState([]);
+  const [list, setList] = useState(0);
   const [dialog, setDialog] = useState(false);
   const [form, setForm] = useState({
     email: '',
@@ -44,6 +50,34 @@ function ModeratorPage() {
       .then(() => {
         // eslint-disable-next-line no-underscore-dangle
         setReported(reported.filter((item) => item._id !== post._id));
+      })
+      // eslint-disable-next-line no-unused-vars
+      .catch((error) => {
+        // console.log(error);
+        alert('Algo deu errado!');
+      });
+  };
+
+  const handleBan = (infractor) => {
+    apiHandler
+      .post('/ban/user', infractor)
+      .then(() => {
+        // eslint-disable-next-line no-underscore-dangle
+        window.location.reload();
+      })
+      // eslint-disable-next-line no-unused-vars
+      .catch((error) => {
+        // console.log(error);
+        alert('Algo deu errado!');
+      });
+  };
+
+  const handleUnban = (infractor) => {
+    apiHandler
+      .post('/unban/user', infractor)
+      .then(() => {
+        // eslint-disable-next-line no-underscore-dangle
+        window.location.reload();
       })
       // eslint-disable-next-line no-unused-vars
       .catch((error) => {
@@ -88,6 +122,18 @@ function ModeratorPage() {
         .catch((error) => {
           // console.log(error);
         });
+
+      apiHandler
+        .get('/search/user/infractor')
+        .then((response) => {
+          if (response.status === 200) {
+            setInfractors(response.data);
+          }
+        })
+        // eslint-disable-next-line no-unused-vars
+        .catch((error) => {
+          // console.log(error);
+        });
     };
     if (checkMod()) {
       fetchData();
@@ -113,58 +159,121 @@ function ModeratorPage() {
                 </Button>
               </Grid>
               <Grid item md="12">
-                <Card className="card-mod">
+                <Card className="card-mod" alignItems="center">
                   <Box maxHeight="80vh" overflow="auto">
-                    <List>
-                      {reported === [] ? (
-                        <Typography variant="h3" textAlign="center">
-                          Não há denúncias de projetos para serem analisadas
-                        </Typography>
-                      ) : (
-                        reported.map((post) => (
-                          <div>
-                            <ListItem>
-                              <Grid container alignItems="center">
-                                <Grid item xs={10}>
-                                  <Typography variant="h4">
-                                    {post.subject}
-                                  </Typography>
-                                  <Typography variant="h6">
-                                    {`Descrição: ${post.body}`}
-                                  </Typography>
-                                  <Typography variant="h6">
-                                    {`Usuário: ${post.ownerId}`}
-                                  </Typography>
-                                  <Typography variant="h6">
-                                    {`Tags: ${post.tags.join(', ')}`}
-                                  </Typography>
-                                  <Typography variant="h6">
-                                    {`Curso: ${post.course}`}
-                                  </Typography>
+                    <Grid item md={12} textAlign="center">
+                      <FormControl
+                        variant="standard"
+                        alignItems="center"
+                        sx={{ m: 2, minWidth: 120 }}
+                      >
+                        <InputLabel>Lista</InputLabel>
+                        <Select
+                          id="select-list"
+                          value={list}
+                          onChange={(e) => setList(e.target.value)}
+                          label="Lista"
+                        >
+                          <MenuItem value={0}>Denúncias</MenuItem>
+                          <MenuItem value={1}>Usuários</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Grid>
+                    {list === 0 ? (
+                      <List>
+                        {reported === [] ? (
+                          <Typography variant="h3" textAlign="center">
+                            Não há denúncias de projetos para serem analisadas
+                          </Typography>
+                        ) : (
+                          reported.map((post) => (
+                            <div>
+                              <ListItem>
+                                <Grid container alignItems="center">
+                                  <Grid item xs={10}>
+                                    <Typography variant="h4">
+                                      {post.subject}
+                                    </Typography>
+                                    <Typography variant="h6">
+                                      {`Descrição: ${post.body}`}
+                                    </Typography>
+                                    <Typography variant="h6">
+                                      {`Usuário: ${post.ownerId}`}
+                                    </Typography>
+                                    <Typography variant="h6">
+                                      {`Tags: ${post.tags.join(', ')}`}
+                                    </Typography>
+                                    <Typography variant="h6">
+                                      {`Curso: ${post.course}`}
+                                    </Typography>
+                                  </Grid>
+                                  <Grid item xs={1}>
+                                    <Button
+                                      className="button-mod-ok"
+                                      onClick={() => handleUnreport(post)}
+                                    >
+                                      OK
+                                    </Button>
+                                  </Grid>
+                                  <Grid item xs={1}>
+                                    <Button
+                                      className="button-mod-delete"
+                                      onClick={() => handleRemove(post)}
+                                    >
+                                      Apagar
+                                    </Button>
+                                  </Grid>
                                 </Grid>
-                                <Grid item xs={1}>
-                                  <Button
-                                    className="button-mod-ok"
-                                    onClick={() => handleUnreport(post)}
-                                  >
-                                    OK
-                                  </Button>
+                              </ListItem>
+                              <Divider />
+                            </div>
+                          ))
+                        )}
+                      </List>
+                    ) : (
+                      <List>
+                        {infractors === [] ? (
+                          <Typography variant="h3" textAlign="center">
+                            Não há infratores
+                          </Typography>
+                        ) : (
+                          infractors.map((infractor) => (
+                            <div>
+                              <ListItem>
+                                <Grid container alignItems="center">
+                                  <Grid item xs={11}>
+                                    <Typography variant="h4">
+                                      {`Usuário: ${infractor.user}`}
+                                    </Typography>
+                                    <Typography variant="h6">
+                                      {`Infrações: ${infractor.infractions.length}`}
+                                    </Typography>
+                                  </Grid>
+                                  <Grid item xs={1}>
+                                    {infractor.banStatus ? (
+                                      <Button
+                                        className="button-mod-ok"
+                                        onClick={() => handleUnban(infractor)}
+                                      >
+                                        Desbanir
+                                      </Button>
+                                    ) : (
+                                      <Button
+                                        className="button-mod-delete"
+                                        onClick={() => handleBan(infractor)}
+                                      >
+                                        Banir
+                                      </Button>
+                                    )}
+                                  </Grid>
                                 </Grid>
-                                <Grid item xs={1}>
-                                  <Button
-                                    className="button-mod-delete"
-                                    onClick={() => handleRemove(post)}
-                                  >
-                                    Apagar
-                                  </Button>
-                                </Grid>
-                              </Grid>
-                            </ListItem>
-                            <Divider />
-                          </div>
-                        ))
-                      )}
-                    </List>
+                              </ListItem>
+                              <Divider />
+                            </div>
+                          ))
+                        )}
+                      </List>
+                    )}
                   </Box>
                 </Card>
               </Grid>
