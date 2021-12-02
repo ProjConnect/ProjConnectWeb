@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/jsx-wrap-multilines */
 /* eslint-disable  operator-linebreak */
+/* eslint-disable object-curly-newline */
 import React, { useState, useEffect } from 'react';
 import '../LandingPage/LandingPage.css';
 import {
@@ -19,6 +20,8 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Box from '@mui/material/Box';
 import NavBar from '../../components/Navbars/Navbar';
+import ImageSelect from '../../components/ImageSelect/ImageSelect';
+import ProjectImages from '../../components/ProjectImages/ProjectImages';
 import apiHandler from '../../services/api';
 import { logout } from '../../services/auth';
 
@@ -65,6 +68,7 @@ const tags = [
 ];
 
 function AddProject() {
+  const imageSet = ProjectImages;
   const [checkedBoxes, setCheckedBoxes] = useState(
     new Array(tags.length).fill(false),
   );
@@ -76,6 +80,9 @@ function AddProject() {
   const [observation, setObservations] = useState('');
   const [course, setCourse] = useState('');
   const [missingFields, setMissingFields] = useState(false);
+  const [deadline, setDeadline] = useState(null);
+  const [dialog, setDialog] = useState(false);
+  const [image, setImage] = useState({ index: 0 });
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -114,12 +121,14 @@ function AddProject() {
       const newPost = {
         subject,
         ownerId,
+        deadline,
         devId: [ownerId, ...supporters.split(/[,|]+/).map((str) => str.trim())],
         body,
         supporters: supporters.split(/[,|]+/).map((str) => str.trim()),
         isArchived: false,
         tags: [...t, ...r],
         course,
+        image: image.index,
       };
       apiHandler
         .post('/new-post', newPost)
@@ -170,7 +179,7 @@ function AddProject() {
                         />
                       </FormGroup>
                     </Col>
-                    <Col className="pl-1" md="6">
+                    <Col className="pl-1" md="3">
                       <FormGroup>
                         <label>Sigla da disciplina</label>
                         <Input
@@ -178,6 +187,16 @@ function AddProject() {
                           type="text"
                           value={course}
                           onChange={(event) => setCourse(event.target.value)}
+                        />
+                      </FormGroup>
+                    </Col>
+                    <Col className="pl-1" md="3">
+                      <FormGroup>
+                        <label>Prazo</label>
+                        <Input
+                          type="date"
+                          value={deadline}
+                          onChange={(event) => setDeadline(event.target.value)}
                         />
                       </FormGroup>
                     </Col>
@@ -289,6 +308,16 @@ function AddProject() {
                   </Row>
                   <Row>
                     <Col md="12">
+                      <Button
+                        className="button-round"
+                        onClick={() => setDialog(true)}
+                      >
+                        Escolher imagem de projeto
+                      </Button>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col md="12">
                       <FormGroup>
                         <label>Observações</label>
                         <Input
@@ -329,6 +358,15 @@ function AddProject() {
           </Col>
         </Row>
       </div>
+      <ImageSelect
+        dialog={dialog}
+        setDialog={setDialog}
+        form={image}
+        setForm={setImage}
+        value="index"
+        imageSet={imageSet}
+        description="Selecione a imagem desejada"
+      />
     </>
   );
 }

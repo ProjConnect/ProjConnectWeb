@@ -22,12 +22,13 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import ReportIcon from '@material-ui/icons/Report';
-import img1 from '../assets/images/img1.jpg';
+import ProjectImages from '../components/ProjectImages/ProjectImages';
 import NavBar from '../components/Navbars/Navbar';
 import apiHandler from '../services/api';
 import { checkMod, login, logout, modAccess } from '../services/auth';
 
 function ProjectList() {
+  const images = ProjectImages;
   const [projectList, setProjectList] = useState(null);
   const [dialog, setDialog] = useState(false);
   // eslint-disable-next-line object-curly-newline
@@ -135,7 +136,7 @@ function ProjectList() {
                             </Link>
                           </h4>
                           <div className="card-date">
-                            Prazo de entrega: 20/10/2021
+                            {`Prazo de entrega: ${post.deadline === null || post.deadline === '' ? 'Não há' : post.deadline}`}
                           </div>
                         </Grid>
                         <Grid item xs={2}>
@@ -148,7 +149,7 @@ function ProjectList() {
                         </Grid>
                       </Grid>
                     </div>
-                    <img className="image" src={img1} alt="Foto do projeto" />
+                    <img className="image" src={images[post.image]} alt="Foto do projeto" />
                     <CardHeader>
                       <CardTitle tag="h5">Descrição</CardTitle>
                     </CardHeader>

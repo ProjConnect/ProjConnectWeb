@@ -16,7 +16,7 @@ import {
   VerticalTimeline,
   VerticalTimelineElement,
 } from 'react-vertical-timeline-component';
-import Data from '../data';
+import ProjectImages from '../components/ProjectImages/ProjectImages';
 import 'react-vertical-timeline-component/style.min.css';
 import Avatars from '../components/Avatars/Avatars';
 import NavBar from '../components/Navbars/Navbar';
@@ -25,6 +25,7 @@ import { logout } from '../services/auth';
 
 function User() {
   const avatars = Avatars;
+  const projectImgs = ProjectImages;
 
   const [isExpanded, setExpanded] = useState(false);
   const { getCollapseProps, getToggleProps } = useCollapse({
@@ -47,12 +48,25 @@ function User() {
     otherSkills: '',
   });
 
+  const [projects, setProjects] = useState([]);
+
   useEffect(() => {
     const fetchData = () => {
       apiHandler
         .get('/my_profile')
         .then((response) => {
           setForm(response.data);
+        })
+        .catch((error) => {
+          // console.log(error);
+          if (error.response.status === 401) {
+            logout();
+          }
+        });
+      apiHandler
+        .get('/posts/mine')
+        .then((response) => {
+          setProjects(response.data);
         })
         .catch((error) => {
           // console.log(error);
@@ -128,11 +142,11 @@ function User() {
           Histórico de pedidos realizados e propostos
         </h4>
         <VerticalTimeline>
-          {Data.map((element) => (
+          {projects.map((element) => (
             <VerticalTimelineElement key={element.key} iconStyle={IconStyles}>
               <Row className="vertical-timeline-element-title">
                 <div className="project-title">
-                  {` ${element.title} `}
+                  {` ${element.subject} `}
                   <Button
                     className="historic-button"
                     // eslint-disable-next-line react/jsx-props-no-spreading
@@ -147,21 +161,23 @@ function User() {
                 </div>
               </Row>
               <p>
-                <img className="img" src={element.img} alt="Imagem" />
+                <img
+                  className="img"
+                  src={projectImgs[element.image]}
+                  alt="Imagem"
+                />
               </p>
               <CardTitle tag="h5">Descrição</CardTitle>
-              <p className="description">
-                Descrição do projeto, lorem ipsum dolor sit amet, consectetur
-                adipiscing elit.
-              </p>
+              <p className="description">{element.body}</p>
               {/* eslint-disable-next-line react/jsx-props-no-spreading */}
               <section {...getCollapseProps()}>
                 <CardTitle tag="h5">Linguagens e tecnologias</CardTitle>
-                <p className="description">Python, Figma</p>
+                <p className="description">{element.tags.join(', ')}</p>
                 <CardTitle tag="h5">Outros requerimentos</CardTitle>
                 <p className="description">
-                  Requerimentos do projeto, ut quis lectus at ante ultricies
-                  laoreet.
+                  {element.course !== ''
+                    ? `Requer estar cursando disciplina ${element.course}`
+                    : 'Não há outros requisitos!'}
                 </p>
                 <CardTitle tag="h5">Observações</CardTitle>
                 <p className="description">
