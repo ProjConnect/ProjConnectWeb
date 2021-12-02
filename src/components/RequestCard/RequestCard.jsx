@@ -42,7 +42,7 @@ function RequestCard({ title, devs, callback }) {
           {devs.map((dev) => (
             <Col className="ml-auto">
               <p className="topic">Username</p>
-              <Link to={`/profile/${dev.devId}`}>
+              <Link to={`/profile/user/${dev.devId}`}>
                 <p>{dev.devId}</p>
               </Link>
               {dev.description.length > 0 && (
