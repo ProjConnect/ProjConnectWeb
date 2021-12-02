@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/jsx-wrap-multilines */
 /* eslint-disable  operator-linebreak */
-/* eslint-disable object-curly-newline */
+/* eslint-disable object-curly-newline, no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import '../LandingPage/LandingPage.css';
 import {
@@ -111,11 +111,9 @@ function AddProject() {
   }
 
   function handleClick() {
-    const t = tags.filter((element, index) => checkedBoxes[index]);
     const r = requirements.split(/[,|]+/).map((str) => str.trim());
     let requiredFieldsFilled = subject.length * body.length > 0;
-    requiredFieldsFilled =
-      requiredFieldsFilled && (t.length > 0 || r.length > 0);
+    requiredFieldsFilled = requiredFieldsFilled && r.length > 0;
     setMissingFields(!requiredFieldsFilled);
     if (requiredFieldsFilled) {
       const newPost = {
@@ -126,7 +124,7 @@ function AddProject() {
         body,
         supporters: supporters.split(/[,|]+/).map((str) => str.trim()),
         isArchived: false,
-        tags: [...t, ...r],
+        tags: r,
         course,
         image: image.index,
       };
@@ -214,8 +212,8 @@ function AddProject() {
                       </FormGroup>
                     </Col>
                   </Row>
-                  <label>Linguagens e tecnologias</label>
-                  <Row>
+                  {/* <label>Linguagens e tecnologias</label>
+                   <Row>
                     <Col md="4">
                       <Box sx={boxStyle}>
                         {tags.slice(0, tags.length / 3).map((tag, index) => (
@@ -277,11 +275,11 @@ function AddProject() {
                           ))}
                       </Box>
                     </Col>
-                  </Row>
+                  </Row> */}
                   <Row>
                     <Col md="6">
                       <FormGroup>
-                        <label>Outros requerimentos</label>
+                        <label>Linguagens e Tecnologias</label>
                         <Input
                           type="textarea"
                           placeholder="Kotlin, PHP, Unity"
@@ -316,7 +314,7 @@ function AddProject() {
                       </Button>
                     </Col>
                   </Row>
-                  <Row>
+                  {/* <Row>
                     <Col md="12">
                       <FormGroup>
                         <label>Observações</label>
@@ -330,7 +328,7 @@ function AddProject() {
                         />
                       </FormGroup>
                     </Col>
-                  </Row>
+                  </Row> */}
                   <div className="button-container">
                     <Row>
                       <div className="update ml-auto mr-auto">

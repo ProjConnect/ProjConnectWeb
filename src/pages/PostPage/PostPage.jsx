@@ -14,12 +14,13 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, useParams } from 'react-router-dom';
 import ReportIcon from '@material-ui/icons/Report';
-import img1 from '../../assets/images/img1.jpg';
+import ProjectImages from '../../components/ProjectImages/ProjectImages';
 import NavBar from '../../components/Navbars/Navbar';
 import apiHandler from '../../services/api';
 import { checkMod, login, logout, modAccess } from '../../services/auth';
 
 function PostPage() {
+  const images = ProjectImages;
   const { postId } = useParams();
   const [ideaPost, setPost] = useState(null);
   const [dialog, setDialog] = useState(false);
@@ -115,7 +116,7 @@ function PostPage() {
                       <Grid item xs={10}>
                         <h1 className="card-title">{ideaPost.subject}</h1>
                         <div className="card-date">
-                          Prazo de entrega: 20/10/2021
+                          {`Prazo de entrega: ${ideaPost.deadline === null || ideaPost.deadline === '' ? 'Não há' : ideaPost.deadline}`}
                         </div>
                         <div>
                           <p>
@@ -141,13 +142,13 @@ function PostPage() {
                   </div>
                   <Row>
                     <Col md="12">
-                      <img className="image" src={img1} alt="Foto do projeto" />
+                      <img className="image" src={images[ideaPost.image]} alt="Foto do projeto" />
                     </Col>
                   </Row>
                   <Row>
                     <Col md="12">
                       <h4 className="card-title">Integrantes</h4>
-                      {ideaPost.supporters.length > 0 &&
+                      {ideaPost.devId.length > 0 &&
                         ideaPost.supporters.map((dev) => (
                           <Link to={`/profile/${dev}`}>
                             {dev}
