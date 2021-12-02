@@ -119,6 +119,15 @@ O projeto do front-end foi desenvolvido utilizando React.
 
 ### Ambientes
 
+A imagem abaixo apresenta em alto nível a arquitetura de nossa plataforma. Dentro da nuvem fornecida pelo IC, temos o front e o back 
+da aplicação sendo que temos uma versão de produção (prod) e uma versão de testes (dev), utilizando as branches main e staging 
+respectivamente. O redirecionamento para o endereço correto fica a cargo do NGINX.
+
+Utilizamo o banco de dados MongoDB Atlas que é fornecido em sua nuvem própria e separamos o banco em duas partes - uma que trabalha 
+(salva e gerencia os dados) exclusivamente para a produção e outra que trabalha exclusivamente para testes (dev).
+
+![deploy](assets/deploy.png)
+
 #### Configuração do Ambiente (Ubuntu 20.04 foi utilizado)
 
 - Instale os pacotes `g++`, `make` e `python` pelo gerenciador de pacotes.
