@@ -19,7 +19,7 @@ export const Routes = () => (
     <Route exact path="/project/list" component={ProjectList} />
     <Route exact path="/project/recommend/:name" component={ProjectRecommend} />
     <Route exact path="/profile" component={User} />
-    <Route exact path="/profile/:username" component={ProfilePage} />
+    <Route exact path="/profile/user/:username" component={ProfilePage} />
     <Route exact path="/profile/edit" component={EditProfile} />
     <Route exact path="/project/new" component={AddProject} />
     <Route exact path="/requests" component={PostRequestsPage} />

@@ -93,11 +93,14 @@ function PostPage() {
           devId,
           description: '',
         };
-        apiHandler.post('/request/create', newRequest).then(() => {
-          alert('Solicitação feita com sucesso');
-        }).catch(() => {
-          alert('Erro na solicitação');
-        });
+        apiHandler
+          .post('/request/create', newRequest)
+          .then(() => {
+            alert('Solicitação feita com sucesso');
+          })
+          .catch(() => {
+            alert('Erro na solicitação');
+          });
       })
       .catch((error) => {
         // console.log(error);
@@ -121,12 +124,17 @@ function PostPage() {
                       <Grid item xs={10}>
                         <h1 className="card-title">{ideaPost.subject}</h1>
                         <div className="card-date">
-                          {`Prazo de entrega: ${ideaPost.deadline === null || ideaPost.deadline === '' ? 'Não há' : ideaPost.deadline}`}
+                          {`Prazo de entrega: ${
+                            ideaPost.deadline === null ||
+                            ideaPost.deadline === ''
+                              ? 'Não há'
+                              : ideaPost.deadline
+                          }`}
                         </div>
                         <div>
                           <p>
                             Ideia postada por &nbsp;
-                            <Link to={`/profile/${ideaPost.ownerId}`}>
+                            <Link to={`/profile/user/${ideaPost.ownerId}`}>
                               <b>{ideaPost.ownerId}</b>
                             </Link>
                           </p>
@@ -147,7 +155,11 @@ function PostPage() {
                   </div>
                   <Row>
                     <Col md="12">
-                      <img className="image" src={images[ideaPost.image]} alt="Foto do projeto" />
+                      <img
+                        className="image"
+                        src={images[ideaPost.image]}
+                        alt="Foto do projeto"
+                      />
                     </Col>
                   </Row>
                   <Row>
@@ -155,7 +167,7 @@ function PostPage() {
                       <h4 className="card-title">Integrantes</h4>
                       {ideaPost.devId.length > 0 &&
                         ideaPost.devId.map((dev) => (
-                          <Link to={`/profile/${dev}`}>
+                          <Link to={`/profile/user/${dev}`}>
                             {dev}
                             ,
                           </Link>
